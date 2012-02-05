@@ -1,7 +1,22 @@
 (($) ->
 
 	$(document).ready ->
-		console.log 'ready'
 		$('.carousel-container').carousel()
+
+		$nutritionFactsButton = $ '.nutrition-facts-button'
+		$nutritionFactsButton.click ->
+			$(@).addClass 'active'
+			$nutritionFacts = $ '.nutrition-facts'
+			$nutritionFacts.stop().slideDown().find('.percent-bar').each ->
+				$bar = $ @
+				percent = parseInt $bar.attr('data-percentage')
+				animationProperties = 'width' : "#{percent}%"
+				animationSettings = 'duration' : 'slow'
+				$bar.css('width': 0).stop(true).delay('slow').animate animationProperties, animationSettings
+			$nutritionFacts.find('.close-button').click ->
+				$nutritionFacts.stop().slideUp()
+				$nutritionFactsButton.removeClass 'active'
+				no
+			no
 
 )(jQuery)

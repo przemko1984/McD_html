@@ -10,7 +10,6 @@
 	$.extend $.fn,
 		
 		carousel: (options) ->
-			console.log 'carousel fired'
 			defaults = 
 				'duration': 'slow'
 				'easing': 'swing'
@@ -18,7 +17,7 @@
 				'delay': 0
 			opts = $.extend defaults, options
 			@each ->
-				$self = $(@)
+				$self = $ @
 				$ul = $self.find 'ul'
 				$li = $ul.find 'li'
 				$layers = $ul.find '.carousel-layer'
@@ -40,9 +39,9 @@
 				$nextArrow.addClass 'disabled' if itemCount < 2
 
 				$layers.each ->
-					$layer = $(@)
-					$layer.data 'speed', if $layer.attr 'data-speed' then $layer.attr 'data-speed' else opts.speed
-					$layer.data 'delay', if $layer.attr 'data-delay' then $layer.attr 'data-delay' else opts.delay
+					$layer = $ @ 
+					$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
+					$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
 
 				$self.data 'carousel',
 					'currentItem': 0
@@ -60,16 +59,21 @@
 							'complete': ->
 								animationRunning = no
 						
-						$ul.stop().animate animationProperties, animationSettings
+						$ul.stop().delay(opts.delay).animate animationProperties, animationSettings
 						
 						$li.each (i) ->
 							if i is index
 								animationProperties =
 									'opacity': 1
+								direction = if $self.data('carousel').currentItem < index then 1 else -1
+								$(@).find('.carousel-layer').each ->
+									$layer = $ @
+									$layer.css('left': "#{direction * $layer.data('speed') * 100}%", 'opacity': 0).stop().delay($layer.data 'delay').animate ('left': 0, 'opacity': 1), animationSettings
+									
 							else
 								animationProperties =
 									'opacity': 0
-							$(@).stop().animate animationProperties, animationSettings
+							$(@).stop().delay(opts.delay).animate animationProperties, animationSettings
 													
 						if index is itemCount - 1 then $nextArrow.addClass 'disabled' else $nextArrow.removeClass 'disabled'
 						if index is 0 then $previousArrow.addClass 'disabled' else $previousArrow.removeClass 'disabled'

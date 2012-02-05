@@ -211,11 +211,13 @@ td { vertical-align: top; }
    Author: Jakub Korzeniowski, Przemysław Ożóg
    ========================================================================== */
 
-@font-face { font-family: AkzidenzGrotesk; src: url('../font/font.otf'); } 
+@font-face { font-family: AkzidenzGroteskCondensed; src: url('../font/font-condensed.otf'); }
+@font-face { font-family: AkzidenzGrotesk; src: url('../font/font.otf'); }
+@font-face { font-family: AkzidenzGroteskMediumCondensed; src: url('../font/font-medium-condensed.otf'); } 
 
 h1, h2, h3, h4, h5 {
   /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-  font-family: "AkzidenzGrotesk", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+  font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
   text-transform: uppercase;
 }
 
@@ -270,7 +272,7 @@ body {
 header {
   background-color: #000;
   /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-  font-family: "AkzidenzGrotesk", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+  font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
 
   -webkit-box-shadow: -1px 1px 6px rgba(0, 0, 0, 0.55);
   -moz-box-shadow:    -1px 1px 6px rgba(0, 0, 0, 0.55);
@@ -313,6 +315,12 @@ header {
 #main {
   background-color: #fff;
 }
+
+  .top-border {
+    border-top: 1px dashed #bcbdc0;
+    margin: 40px auto;
+    padding: 40px 0;
+  }
 
   #top-content {
     color: #fff;
@@ -420,9 +428,256 @@ header {
               }
 
   #main-content {
-    margin: 0 auto;
+    margin: 40px auto 0;
     width: 960px;
   }
+
+    .info-box {
+      background-color: #dcddde;
+      padding: 40px;
+    }
+
+    .desserts .info-box {
+      width: 390px;
+    }
+
+    a.more-button {
+      border: 1px solid #6b6d6e;
+      color: #fff;
+      /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
+      font-family: "AkzidenzGrotesk", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+      font-size: 1.08em;
+      line-height: 1.9em;
+      padding: 4px 54px 4px 27px;
+      position: relative;
+      text-decoration: none;
+
+      background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 31%, rgba(93,90,91,0) 45%, rgba(35,31,32,0.33) 50%, rgba(35,31,32,1) 60%, rgba(35,31,32,1) 100%) #37383b; /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0)), color-stop(31%,rgba(255,255,255,0)), color-stop(45%,rgba(93,90,91,0)), color-stop(50%,rgba(35,31,32,0.33)), color-stop(60%,rgba(35,31,32,1)), color-stop(100%,rgba(35,31,32,1))) #37383b; /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(93,90,91,0) 45%,rgba(35,31,32,0.33) 50%,rgba(35,31,32,1) 60%,rgba(35,31,32,1) 100%) #37383b; /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(93,90,91,0) 45%,rgba(35,31,32,0.33) 50%,rgba(35,31,32,1) 60%,rgba(35,31,32,1) 100%) #37383b; /* Opera 11.10+ */
+      background: -ms-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(93,90,91,0) 45%,rgba(35,31,32,0.33) 50%,rgba(35,31,32,1) 60%,rgba(35,31,32,1) 100%) #37383b; /* IE10+ */
+      background: linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 31%,rgba(93,90,91,0) 45%,rgba(35,31,32,0.33) 50%,rgba(35,31,32,1) 60%,rgba(35,31,32,1) 100%) #37383b; /* W3C */
+      background-color: #37383b\0/IE8+9;
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#231f20',GradientType=0 ); /* IE6-9 */
+    }
+
+    a.more-button:hover {
+      background: -moz-linear-gradient(top,  rgba(35,31,32,1) 0%, rgba(35,31,32,1) 40%, rgba(35,31,32,0.4) 49%, rgba(101,98,99,0) 55%, rgba(255,255,255,0) 69%, rgba(255,255,255,0) 100%) #37383b; /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(35,31,32,1)), color-stop(40%,rgba(35,31,32,1)), color-stop(49%,rgba(35,31,32,0.4)), color-stop(55%,rgba(101,98,99,0)), color-stop(69%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0))) #37383b; /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top,  rgba(35,31,32,1) 0%,rgba(35,31,32,1) 40%,rgba(35,31,32,0.4) 49%,rgba(101,98,99,0) 55%,rgba(255,255,255,0) 69%,rgba(255,255,255,0) 100%) #37383b; /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top,  rgba(35,31,32,1) 0%,rgba(35,31,32,1) 40%,rgba(35,31,32,0.4) 49%,rgba(101,98,99,0) 55%,rgba(255,255,255,0) 69%,rgba(255,255,255,0) 100%) #37383b; /* Opera 11.10+ */
+      background: -ms-linear-gradient(top,  rgba(35,31,32,1) 0%,rgba(35,31,32,1) 40%,rgba(35,31,32,0.4) 49%,rgba(101,98,99,0) 55%,rgba(255,255,255,0) 69%,rgba(255,255,255,0) 100%) #37383b; /* IE10+ */
+      background: linear-gradient(top,  rgba(35,31,32,1) 0%,rgba(35,31,32,1) 40%,rgba(35,31,32,0.4) 49%,rgba(101,98,99,0) 55%,rgba(255,255,255,0) 69%,rgba(255,255,255,0) 100%) #37383b; /* W3C */
+      background-color: #37383b\0/IE8+9;
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#231f20', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+    }
+
+    a.more-button:after {
+      background: url(../img/more-button.png) no-repeat;
+      content: '';
+      display: block;
+      height: 24px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 32px;
+    }
+
+    .teaching-aids {
+      
+    }
+
+      .teaching-aids .heading {
+        text-align: center;
+      }
+
+        .teaching-aids h3 {
+          display: inline;
+          font-size: 4.62em;
+          margin: 0 0 1em;
+          position: relative;
+        }
+
+          .teaching-aids h3:before, .teaching-aids h3:after {
+            background: url(../img/heading-dots.png);
+            content: '';
+            display: block;
+            font-size: 3em;
+            height: 8px;
+            line-height: 0;
+            position: absolute;
+            width: 36px;
+            top: 50%;
+          }
+
+          .teaching-aids h3:before {
+            right: 100%;
+            margin: -11px 15px 0 0;
+          }
+
+          .teaching-aids h3:after {
+            left: 100%;
+            margin: -11px 0 0 15px;
+          }
+
+      .teaching-aids ul.menu {
+        list-style: none;
+        margin: 0;
+        padding: 13px 0 27px;
+      }
+
+        .teaching-aids .menu li {
+          display: block;
+          float: left;
+          /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
+          font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+          padding: 10px;
+          text-transform: uppercase;
+          width: 300px;
+        }
+        
+          .teaching-aids .menu li a {
+            background-image: url(../img/teaching-aids-icons.png);
+            background-repeat: no-repeat;
+            color: #a09fa0;
+            display: block;
+            font-size: 1.85em;
+            height: 25px;
+            margin: 0 auto;
+            padding: 145px 0 0 0;
+            text-align: center;
+            text-decoration: none;
+            width: 200px;
+          }
+
+          .teaching-aids .menu li a.nutrition-facts-button { background-position: 0 0; }
+          .teaching-aids .menu li a.nutrition-facts-button:hover, .teaching-aids .menu li a.nutrition-facts-button.active { background-position: 0 -250px; }
+          .teaching-aids .menu li a.ballanced-choise-button { background-position: -200px 0; }
+          .teaching-aids .menu li a.ballanced-choise-button:hover, .teaching-aids .menu li a.ballanced-choise-button.active { background-position: -200px -250px; }
+          .teaching-aids .menu li a.price-list-button { background-position: -400px 0; }
+          .teaching-aids .menu li a.price-list-button:hover, .teaching-aids .menu li a.price-list-button.active { background-position: -400px -250px; }
+
+      .nutrition-facts {
+        background-color: #2f2f2f;
+        color: #fff;
+        display: none;
+        /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
+        font-family: "AkzidenzGroteskMediumCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;       
+        overflow: hidden;
+        padding: 40px 45px;
+        position: relative;
+      }
+
+      .no-js .nutrition-facts {
+        display: block;
+      }
+
+        .close-button {
+          background-image: url(../img/close-button.png);
+          background-repeat: no-repeat;
+          height: 12px;
+          position: absolute;
+          right: 17px;
+          top: 40px;
+          width: 11px;
+        }
+
+        .nutrition-box {
+          float: left;
+          width: 145px;
+        }
+
+        .legend {
+          padding: 0 20px;
+          width: 105px;
+        }
+
+          .nutrition-box span {
+            display: block;
+          }
+
+          .nutrition-box .label {
+            background-image: url(../img/nutrition-facts-icons.png);
+            background-repeat: no-repeat;
+            font-size: 1.38em;
+            line-height: 1.6em;
+            padding: 0 0 0 30px;
+            text-transform: uppercase;
+          }
+
+          .legend .label {
+            background-position: 100% 0px;
+            padding: 0 30px 0 0;
+            text-align: right;
+          }
+          .calories .label { background-position: 0 -50px; }
+          .proteins .label { background-position: 0 -100px; }
+          .fats .label { background-position: 0 -150px; }
+          .carbohydrates .label { background-position: 0 -200px; }
+          .salt .label { background-position: 0 -250px; }
+
+          .nutrition-box .value {
+            font-size: 4.62em;
+            line-height: 1em;
+            margin: .2em 0 .07em;
+          }
+
+          .nutrition-box .percent {
+            float: left;
+            font-size: 2.08em;
+          }
+
+          .nutrition-box .percent-bar-container {
+            background-color: #fff;
+            height: 19px;
+            margin: 10px 0 0 50px;
+            position: relative;
+            width: 70px;
+          }
+
+          .nutrition-box .percent-bar-container:after {
+            border-left: 1px dashed #2f2f2e;
+            border-right: 1px dashed #2f2f2e;
+            content: '';
+            display: none;
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 0;
+            z-index: 2;
+          }
+
+          .nutrition-box .percent-bar-container.active:after {
+            display: block;
+          }
+
+          .no-js .nutrition-box .percent-bar-container {
+            display: none;
+          }
+
+            .nutrition-box .percent-bar {
+              height: 100%;
+              left: 0;
+              position: absolute;
+              top: 0;
+              width: 0;
+              z-index: 1;
+            }
+
+            .calories .percent-bar { background-color: #d23c7a; }
+            .proteins .percent-bar { background-color: #d73b2c; }
+            .fats .percent-bar { background-color: #f19e39; }
+            .carbohydrates .percent-bar { background-color: #71a542; }
+            .salt .percent-bar { background-color: #4fa7dd; }
+
+
+          .legend .percent {
+            margin: 2.82em 0 0;
+            text-align: right;
+            width: 100%;
+          }
 
 /**
  * Footer styles
@@ -472,7 +727,7 @@ footer {
 
         .footer-box li {
           /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-          font-family: "AkzidenzGrotesk", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+          font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
           text-transform: uppercase;  
         }
 

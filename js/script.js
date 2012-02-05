@@ -2,7 +2,33 @@
 
 (function($) {
   return $(document).ready(function() {
-    console.log('ready');
-    return $('.carousel-container').carousel();
+    var $nutritionFactsButton;
+    $('.carousel-container').carousel();
+    $nutritionFactsButton = $('.nutrition-facts-button');
+    return $nutritionFactsButton.click(function() {
+      var $nutritionFacts;
+      $(this).addClass('active');
+      $nutritionFacts = $('.nutrition-facts');
+      $nutritionFacts.stop().slideDown().find('.percent-bar').each(function() {
+        var $bar, animationProperties, animationSettings, percent;
+        $bar = $(this);
+        percent = parseInt($bar.attr('data-percentage'));
+        animationProperties = {
+          'width': "" + percent + "%"
+        };
+        animationSettings = {
+          'duration': 'slow'
+        };
+        return $bar.css({
+          'width': 0
+        }).stop(true).delay('slow').animate(animationProperties, animationSettings);
+      });
+      $nutritionFacts.find('.close-button').click(function() {
+        $nutritionFacts.stop().slideUp();
+        $nutritionFactsButton.removeClass('active');
+        return false;
+      });
+      return false;
+    });
   });
 })(jQuery);

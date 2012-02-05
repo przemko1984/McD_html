@@ -11,7 +11,6 @@
   return $.extend($.fn, {
     carousel: function(options) {
       var defaults, opts;
-      console.log('carousel fired');
       defaults = {
         'duration': 'slow',
         'easing': 'swing',
@@ -44,8 +43,8 @@
         $layers.each(function() {
           var $layer;
           $layer = $(this);
-          $layer.data('speed', $layer.attr('data-speed') ? $layer.attr('data-speed') : opts.speed);
-          return $layer.data('delay', $layer.attr('data-delay') ? $layer.attr('data-delay') : opts.delay);
+          $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
+          return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
         });
         $self.data('carousel', {
           'currentItem': 0,
@@ -66,18 +65,31 @@
                 return animationRunning = false;
               }
             };
-            $ul.stop().animate(animationProperties, animationSettings);
+            $ul.stop().delay(opts.delay).animate(animationProperties, animationSettings);
             $li.each(function(i) {
+              var direction;
               if (i === index) {
                 animationProperties = {
                   'opacity': 1
                 };
+                direction = $self.data('carousel').currentItem < index ? 1 : -1;
+                $(this).find('.carousel-layer').each(function() {
+                  var $layer;
+                  $layer = $(this);
+                  return $layer.css({
+                    'left': "" + (direction * $layer.data('speed') * 100) + "%",
+                    'opacity': 0
+                  }).stop().delay($layer.data('delay')).animate({
+                    'left': 0,
+                    'opacity': 1
+                  }, animationSettings);
+                });
               } else {
                 animationProperties = {
                   'opacity': 0
                 };
               }
-              return $(this).stop().animate(animationProperties, animationSettings);
+              return $(this).stop().delay(opts.delay).animate(animationProperties, animationSettings);
             });
             if (index === itemCount - 1) {
               $nextArrow.addClass('disabled');
