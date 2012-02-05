@@ -53,7 +53,7 @@ body, button, input, select, textarea { font-family: sans-serif; color: #222; }
 a { color: #00e; }
 a:visited { color: #551a8b; }
 a:hover { color: #06e; }
-a:focus { outline: thin dotted; }
+a:focus { outline: 0; }
 
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
 a:hover, a:active { outline: 0; }
@@ -207,23 +207,280 @@ table { border-collapse: collapse; border-spacing: 0; }
 td { vertical-align: top; }
 
 
-/* ==|== primary styles =====================================================
-   Author: 
+/* ==|== text styles =====================================================
+   Author: Jakub Korzeniowski, Przemysław Ożóg
    ========================================================================== */
 
+@font-face { font-family: AkzidenzGrotesk; src: url('../font/font.otf'); } 
+
+h1, h2, h3, h4, h5 {
+  /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
+  font-family: "AkzidenzGrotesk", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 4.62em;
+}
+
+h2 {
+  font-size: 3.08em;
+}
+
+h3 {
+  font-size: 2.78em;
+}
+
+h4 {
+  
+}
+
+h5 {
+  font-size: 2.31em; 
+}
+
+p {
+  font-size: 1.08em;
+}
+
+/* ==|== primary styles =====================================================
+   Author: Jakub Korzeniowski, Przemysław Ożóg
+   ========================================================================== */
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: #2f2f2f;
+  color: #8c8c8c;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
 
 
+/**
+ * Header styles
+**/
+
+header {
+  background-color: #000;
+  /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
+  font-family: "AkzidenzGrotesk", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+
+  -webkit-box-shadow: -1px 1px 6px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow:    -1px 1px 6px rgba(0, 0, 0, 0.55);
+  box-shadow:         -1px 1px 6px rgba(0, 0, 0, 0.55);
+}
+  
+  #main-menu {
+    margin: 0 auto;
+    width: 960px;
+  }
+
+    #logo {
+      background-image: url(../img/logo.png);
+      float: left;
+      height: 66px;
+      width: 61px;
+    }
+
+    #main-menu ul {
+      float: left;
+      margin: 0 3.85em 0 5.77em;
+    }
+
+      #main-menu li {
+        float: left;
+        padding: 2.5em 1.2em 1.2em;
+      }
+
+        #main-menu li a {
+          color: #fff;
+          font-size: 1.23em;
+          text-decoration: none;
+        }
 
 
+/**
+ * Main styles
+**/
 
+#main {
+  background-color: #fff;
+}
 
+  #top-content {
+    color: #fff;
+    height: 540px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
 
+    #top-content h2 {
+      font-size: 5.54em;
+      margin: 1em 0;
+    }
 
+    #top-content p {
+      font-size: 1.38em;
+      font-style: italic;
+      margin: 8.5em .2em;
+      width: 200px;
+    }
 
+    .carousel-bg {
+      left: 50%;
+      margin: 0 0 0 -700px;
+      min-height: 540px;
+      min-width: 1400px;
+      position: absolute;
+      width: 100%;
+    }
 
+    .carousel-arrow {
+      background-image: url(../img/carousel-arrows.png);
+      background-repeat: none;
+      display: block;
+      height: 81px;
+      margin: -40px 0 0 0;
+      position: absolute;
+      text-align: left;
+      text-indent: -9999px;
+      top: 50%;
+      width: 81px;
+    }
 
+    .carousel-arrow.disabled {
+      cursor: default;
+      opacity: .3;
+    }
 
+    .previous-arrow {
+      background-position: 0 0;
+      left: 56px;
+    }
 
+    .next-arrow {
+      background-position: -81px 0;
+      right: 56px;
+    }
+
+    .no-js .carousel-arrow {
+      display: none;
+    }
+
+    .carousel {
+      height: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+      .carousel .list-wrapper {
+        height: 100%;
+        left: 50%;
+        margin: 0 0 0 -480px;
+        position: absolute;
+        top: 0;
+        width: 100%;
+      }
+
+        .carousel ul {
+          height: 100%;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          top: 0;
+        }
+
+          .carousel li {
+            float: left;
+            height: 100%;
+            width: 960px;
+          }
+
+            .carousel-item {
+              height: 100%;
+              position: relative;
+              width: 100%;
+            }
+
+              .carousel-layer {
+                left: 0;
+                position: absolute;
+                top: 0;
+              }
+
+  #main-content {
+    margin: 0 auto;
+    width: 960px;
+  }
+
+/**
+ * Footer styles
+**/
+
+footer {
+  
+}
+
+  #footer-menu {
+    margin: 0 auto;
+    width: 960px;
+  }
+
+    .footer-box {
+      float: left;
+      width: 320px;
+    }
+
+      .footer-box h5 {
+        border-bottom: 1px dashed #444444;
+        margin: 2.2em 0 .6em;
+        padding: .4em 80px;
+        position: relative;
+      }
+
+      .footer-box h5:after {
+        background-image: url(../img/footer-headers.png);
+        background-repeat: none;
+        content: '';
+        display: block;
+        height: 36px;
+        left: 26px;
+        position: absolute;
+        top: 12px;
+        width: 54px;
+      }
+
+      .products h5:after { background-position: 0 0; }
+      .discounts h5:after { background-position: -54px 0; }
+      .about-us h5:after { background-position: -108px 0; }
+
+      .footer-box ul {
+        margin: 0 0 3em 0;
+        padding: 0 80px;
+      }
+
+        .footer-box li {
+          /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
+          font-family: "AkzidenzGrotesk", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+          text-transform: uppercase;  
+        }
+
+          .footer-box li a {
+            color: #8c8c8c;
+            font-size: 1.38em;
+            text-decoration: none;
+          }
 
 
 /* ==|== non-semantic helper classes ========================================
@@ -259,13 +516,22 @@ td { vertical-align: top; }
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 480px) {
-  /* Style adjustments for viewports 480px and over go here */
+@media only screen and (min-width: 1400px) {
+  /* Style adjustments for viewports 1400px and below go here */
+
+  .carousel-bg {
+    margin: 0 0 0 -50%;
+  }
 
 }
 
-@media only screen and (min-width: 768px) {
-  /* Style adjustments for viewports 768px and over go here */
+@media only screen and (max-width: 768px) {
+  /* Style adjustments for viewports 768px and below go here */
+
+}
+
+@media only screen and (max-width: 480px) {
+  /* Style adjustments for viewports 480px and below go here */
 
 }
 
