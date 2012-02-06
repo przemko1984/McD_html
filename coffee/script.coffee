@@ -4,9 +4,10 @@
 		$('.carousel-container').carousel()
 
 		$nutritionFactsButton = $ '.nutrition-facts-button'
+		$nutritionFacts = $ '.nutrition-facts'
+		$nutritionFacts.css 'display': 'none'
 		$nutritionFactsButton.click ->
 			$(@).addClass 'active'
-			$nutritionFacts = $ '.nutrition-facts'
 			$nutritionFacts.stop().slideDown().find('.percent-bar').each ->
 				$bar = $ @
 				percent = parseInt $bar.attr('data-percentage')

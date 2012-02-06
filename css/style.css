@@ -273,6 +273,8 @@ header {
   background-color: #000;
   /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
   font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+  position: relative;
+  z-index: 100;
 
   -webkit-box-shadow: -1px 1px 6px rgba(0, 0, 0, 0.55);
   -moz-box-shadow:    -1px 1px 6px rgba(0, 0, 0, 0.55);
@@ -307,6 +309,53 @@ header {
           text-decoration: none;
         }
 
+        li .submenu {
+          display: none;
+          position: absolute;
+        }
+
+        .no-touch li:hover > .submenu {
+          display: block;
+        }
+
+        .tiled-submenu {
+          background-color: #fff;
+          height: 540px;
+          left: 0;
+          top: 100%;
+          width: 100%;
+
+          -webkit-box-shadow: -1px 1px 8px rgba(0, 0, 0, 0.15);
+          -moz-box-shadow:    -1px 1px 8px rgba(0, 0, 0, 0.15);
+          box-shadow:         -1px 1px 8px rgba(0, 0, 0, 0.15);
+        }
+
+          .tiled-submenu .tiles-container {
+            height: 100%;
+            margin: 0 auto;
+            width: 1000px;
+          }
+
+            .tiled-submenu .tiles-container h5 {
+              font-size: 1.87em;
+              margin: .5em 0 .2em;
+              text-align: center;
+            }
+            
+            .tiled-submenu .tile {
+              border-bottom: 1px dashed #bcbdc0;
+              float: left;
+              padding: 17px 20px 0;
+              text-transform: uppercase;
+              width: 160px
+            }
+
+              .tiled-submenu .tile a figcaption {
+                color: #8c8c8c;
+                font-size: 1.3em;
+                margin: .2em 0 0 0;
+                text-align: center;
+              }
 
 /**
  * Main styles
@@ -462,7 +511,7 @@ header {
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#231f20',GradientType=0 ); /* IE6-9 */
     }
 
-    a.more-button:hover {
+    .no-touch a.more-button:hover {
       background: -moz-linear-gradient(top,  rgba(35,31,32,1) 0%, rgba(35,31,32,1) 40%, rgba(35,31,32,0.4) 49%, rgba(101,98,99,0) 55%, rgba(255,255,255,0) 69%, rgba(255,255,255,0) 100%) #37383b; /* FF3.6+ */
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(35,31,32,1)), color-stop(40%,rgba(35,31,32,1)), color-stop(49%,rgba(35,31,32,0.4)), color-stop(55%,rgba(101,98,99,0)), color-stop(69%,rgba(255,255,255,0)), color-stop(100%,rgba(255,255,255,0))) #37383b; /* Chrome,Safari4+ */
       background: -webkit-linear-gradient(top,  rgba(35,31,32,1) 0%,rgba(35,31,32,1) 40%,rgba(35,31,32,0.4) 49%,rgba(101,98,99,0) 55%,rgba(255,255,255,0) 69%,rgba(255,255,255,0) 100%) #37383b; /* Chrome10+,Safari5.1+ */
@@ -552,16 +601,15 @@ header {
           }
 
           .teaching-aids .menu li a.nutrition-facts-button { background-position: 0 0; }
-          .teaching-aids .menu li a.nutrition-facts-button:hover, .teaching-aids .menu li a.nutrition-facts-button.active { background-position: 0 -250px; }
+          .no-touch .teaching-aids .menu li a.nutrition-facts-button:hover, .teaching-aids .menu li a.nutrition-facts-button.active { background-position: 0 -250px; }
           .teaching-aids .menu li a.ballanced-choise-button { background-position: -200px 0; }
-          .teaching-aids .menu li a.ballanced-choise-button:hover, .teaching-aids .menu li a.ballanced-choise-button.active { background-position: -200px -250px; }
+          .no-touch .teaching-aids .menu li a.ballanced-choise-button:hover, .teaching-aids .menu li a.ballanced-choise-button.active { background-position: -200px -250px; }
           .teaching-aids .menu li a.price-list-button { background-position: -400px 0; }
-          .teaching-aids .menu li a.price-list-button:hover, .teaching-aids .menu li a.price-list-button.active { background-position: -400px -250px; }
+          .no-touch .teaching-aids .menu li a.price-list-button:hover, .teaching-aids .menu li a.price-list-button.active { background-position: -400px -250px; }
 
       .nutrition-facts {
         background-color: #2f2f2f;
         color: #fff;
-        display: none;
         /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
         font-family: "AkzidenzGroteskMediumCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;       
         overflow: hidden;
@@ -640,17 +688,13 @@ header {
             border-left: 1px dashed #2f2f2e;
             border-right: 1px dashed #2f2f2e;
             content: '';
-            display: none;
+            display: block;
             height: 100%;
-            left: 0;
+            left: 35%;
             position: absolute;
             top: 0;
             width: 0;
             z-index: 2;
-          }
-
-          .nutrition-box .percent-bar-container.active:after {
-            display: block;
           }
 
           .no-js .nutrition-box .percent-bar-container {

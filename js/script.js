@@ -2,13 +2,15 @@
 
 (function($) {
   return $(document).ready(function() {
-    var $nutritionFactsButton;
+    var $nutritionFacts, $nutritionFactsButton;
     $('.carousel-container').carousel();
     $nutritionFactsButton = $('.nutrition-facts-button');
+    $nutritionFacts = $('.nutrition-facts');
+    $nutritionFacts.css({
+      'display': 'none'
+    });
     return $nutritionFactsButton.click(function() {
-      var $nutritionFacts;
       $(this).addClass('active');
-      $nutritionFacts = $('.nutrition-facts');
       $nutritionFacts.stop().slideDown().find('.percent-bar').each(function() {
         var $bar, animationProperties, animationSettings, percent;
         $bar = $(this);
