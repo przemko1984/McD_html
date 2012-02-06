@@ -485,10 +485,30 @@ header {
       background-color: #dcddde;
       padding: 40px;
     }
-
-    .desserts .info-box {
+	
+	.desserts .info-box {
       width: 390px;
     }
+    
+    
+    .main-page .info-box {
+       width: 390px;
+       padding-bottom: 21px;
+    }
+    
+    .main-page .info-box h1 {
+		margin: 0 0 0.2em;
+		width: 70%;
+		line-height: 0.8em;    
+    }
+    .main-page .info-box p {
+    	font-style: italic;
+    	margin-top: 0; 
+    }
+    
+    .main-box {
+	  margin-bottom: 42px;	  	  
+	}
 
     a.more-button {
       border: 1px solid #6b6d6e;
@@ -537,18 +557,18 @@ header {
       
     }
 
-      .teaching-aids .heading {
+      .teaching-aids .heading, .press-room .heading {
         text-align: center;
       }
 
-        .teaching-aids h3 {
+        .teaching-aids h3,.press-room h3 {
           display: inline;
           font-size: 4.62em;
           margin: 0 0 1em;
           position: relative;
         }
 
-          .teaching-aids h3:before, .teaching-aids h3:after {
+          .teaching-aids h3:before, .teaching-aids h3:after,.press-room h3:before, .press-room h3:after {
             background: url(../img/heading-dots.png);
             content: '';
             display: block;
@@ -560,12 +580,12 @@ header {
             top: 50%;
           }
 
-          .teaching-aids h3:before {
+          .teaching-aids h3:before, .press-room h3:before {
             right: 100%;
             margin: -11px 15px 0 0;
           }
 
-          .teaching-aids h3:after {
+          .teaching-aids h3:after, .press-room h3:after {
             left: 100%;
             margin: -11px 0 0 15px;
           }
@@ -616,6 +636,29 @@ header {
         padding: 40px 45px;
         position: relative;
       }
+
+	  .press-room {	  	
+	  	text-align: center;	  	
+	  }
+	  .press-room p{
+	  	font-style: italic;
+	  	font-size: 1.36em;
+	  	text-align: left;	  	
+	  }
+	
+	  .press-room .date {
+	  	color: #8C1622;
+	  	font-size: 1.27em;
+	  	text-align: center;	  	
+	  }
+	  
+	  
+	  
+	  .press-room .short {
+	  	width: 420px;
+	  	margin-left: auto;
+	  	margin-right: auto;
+	  }
 
       .no-js .nutrition-facts {
         display: block;
