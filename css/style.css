@@ -221,13 +221,14 @@ h1, h2, h3, h4, h5 {
   text-transform: uppercase;
 }
 
-h1 {
+h1, .main-page h2 {
   font-size: 4.62em;
 }
 
 h2 {
   font-size: 3.08em;
 }
+
 
 h3 {
   font-size: 2.78em;
@@ -280,6 +281,22 @@ header {
   -moz-box-shadow:    -1px 1px 6px rgba(0, 0, 0, 0.55);
   box-shadow:         -1px 1px 6px rgba(0, 0, 0, 0.55);
 }
+  
+input[type="text"] {
+  border: 0 none;
+  background: url(../img/input-bg.png) no-repeat;
+  padding: 5px 2px 5px 30px;
+  color: #b6b6b6;
+  width: 137px;
+  float: left;
+  
+  /*
+  -webkit-box-shadow: inset -1px 1px 6px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow:    inset -1px 1px 6px rgba(0, 0, 0, 0.55);
+  box-shadow:         inset -1px 1px 6px rgba(0, 0, 0, 0.55);
+  */
+}
+  
   
   #main-menu {
     margin: 0 auto;
@@ -367,9 +384,16 @@ header {
 
   .top-border {
     border-top: 1px dashed #bcbdc0;
-    margin: 40px auto;
+    margin: 40px auto 0;
     padding: 40px 0;
   }
+
+  .top-border+.top-border{
+	 margin-top: 0;	 
+   } 
+   .top-border:last-child {
+   	 margin-bottom: 40px;
+   }
 
   #top-content {
     color: #fff;
@@ -479,16 +503,57 @@ header {
   #main-content {
     margin: 40px auto 0;
     width: 960px;
+    position: relative;
   }
 
     .info-box {
       background-color: #dcddde;
-      padding: 40px;
+      padding: 40px 37px;
     }
-
-    .desserts .info-box {
-      width: 390px;
+	
+	.desserts .info-box {
+      width: 416px;
+      float: left;
+       
     }
+    
+    
+    .main-page .info-box {
+       width: 386px;
+       min-height: 135px;
+       padding-bottom: 21px;
+    }
+    
+    .info-box h1,.info-box h2 {
+		line-height: 0.8em;    
+    }
+    .info-box h1{
+		margin: 0 0 0.5em;
+    }
+    .info-box h2{
+		margin: 0 0 0.2em;
+    }
+    .main-page .info-box p {
+    	font-style: italic;
+    	margin-top: 0; 
+    }
+    
+    .main-box {
+	  margin-bottom: 0px;		  	  
+	}
+	
+	.main-boxes .main-box{
+		float: left;
+	}
+	.main-boxes .main-box:nth-child(even){
+		float: right;
+	}
+	.main-boxes .main-box:nth-child(-n+2) {
+	  margin-bottom: 42px;		  	  
+	}
+	.main-boxes .main-box a.more-button{
+		width: 201px;
+	}
 
     a.more-button {
       border: 1px solid #6b6d6e;
@@ -537,18 +602,18 @@ header {
       
     }
 
-      .teaching-aids .heading {
+      .heading{
         text-align: center;
       }
 
-        .teaching-aids h3 {
+        .heading h3 {
           display: inline;
           font-size: 4.62em;
           margin: 0 0 1em;
           position: relative;
         }
 
-          .teaching-aids h3:before, .teaching-aids h3:after {
+          .heading h3:before, .heading h3:after {
             background: url(../img/heading-dots.png);
             content: '';
             display: block;
@@ -560,12 +625,12 @@ header {
             top: 50%;
           }
 
-          .teaching-aids h3:before {
+          .heading h3:before {
             right: 100%;
             margin: -11px 15px 0 0;
           }
 
-          .teaching-aids h3:after {
+          .heading h3:after {
             left: 100%;
             margin: -11px 0 0 15px;
           }
@@ -616,6 +681,31 @@ header {
         padding: 40px 45px;
         position: relative;
       }
+
+	  .press-room {	  	
+	  	text-align: center;	  	
+	  }
+	  .press-room p{
+	  	font-style: italic;
+	  	font-size: 1.36em;
+	  	text-align: left;	  	
+	  }
+	
+	  .press-room .date {
+	  	color: #8C1622;
+	  	font-size: 1.27em;
+	  	text-align: center;	  	
+	  }
+	  
+	  .press-room .short {
+	  	width: 420px;
+	  	margin-left: auto;
+	  	margin-right: auto;
+	  }
+
+	  .press-room img{
+	  	margin: 23px 0 40px;
+	  }
 
       .no-js .nutrition-facts {
         display: block;
@@ -722,6 +812,26 @@ header {
             text-align: right;
             width: 100%;
           }
+
+
+	.big-photo{
+		float: right;
+		
+	}
+	
+	.desserts .thumbnails {
+		float: left;
+		width: 515px;
+		margin: 40px 0 20px -13px;
+		cursor: pointer;
+	}
+	.desserts .thumbnails img {
+		margin: 20px 0;
+	}
+	
+	.thumbnails_w100{
+		width: 100%; 
+	}
 
 /**
  * Footer styles
