@@ -15,42 +15,83 @@
         'duration': 'slow',
         'easing': 'swing',
         'speed': 1,
-        'delay': 0
+        'delay': 0,
+        'onComplete': $.noop
       };
       opts = $.extend(defaults, options);
       return this.each(function() {
-        var $layers, $li, $nextArrow, $previousArrow, $self, $ul, animationRunning, itemCount, itemWidth;
+        var $controls, $controlsParentWidth, $layers, $li, $nextArrow, $previousArrow, $self, $ul, animationRunning, controlsCount, init, itemCount, itemWidth;
         $self = $(this);
-        $ul = $self.find('ul');
+        $ul = $self.find(':not(.carousel-controls)').children('ul');
         $li = $ul.find('li');
         $layers = $ul.find('.carousel-layer');
         $nextArrow = $self.find('.next-arrow');
         $previousArrow = $self.find('.previous-arrow');
+        $controls = $self.find('.carousel-controls li');
+        $controlsParentWidth = $controls.parent().width();
         itemWidth = $li.width();
         itemCount = $li.length;
+        controlsCount = $controls.length;
         animationRunning = false;
-        $ul.css({
-          'width': "" + (itemWidth * itemCount) + "px"
-        });
-        $ul.wrap($('<div />', {
-          'class': 'list-wrapper'
-        }));
-        $li.filter(':not(:first)').css({
-          'opacity': 0
-        });
-        $previousArrow.addClass('disabled');
-        if (itemCount < 2) $nextArrow.addClass('disabled');
-        $layers.each(function() {
-          var $layer;
-          $layer = $(this);
-          $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
-          return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
-        });
+        init = function() {
+          itemWidth = $li.width();
+          if ($self.data('carousel') != null) {
+            $self.data('carousel').currentItem = 0;
+          }
+          $ul.css({
+            'width': "" + (itemWidth * itemCount) + "px",
+            'position': 'absolute',
+            'left': 0,
+            'top': 0
+          });
+          if (!$self.find('.list-wrapper').length) {
+            $ul.wrap($('<div />', {
+              'class': 'list-wrapper'
+            }));
+          }
+          $li.css({
+            'opacity': 1
+          }).filter(':not(:first)').css({
+            'opacity': 0
+          });
+          $previousArrow.addClass('disabled');
+          $nextArrow.removeClass('disabled');
+          if (itemCount < 2) $nextArrow.addClass('disabled');
+          $layers.each(function() {
+            var $layer;
+            $layer = $(this);
+            $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
+            $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
+            return $layer.css({
+              'opacity': 1
+            });
+          });
+          return $controls.each(function(i) {
+            var $control, horizontalMargin;
+            $control = $(this);
+            if (i === 0) {
+              $control.addClass('active');
+            } else {
+              $control.removeClass('active');
+            }
+            horizontalMargin = parseInt($control.css('margin-left'));
+            horizontalMargin += parseInt($control.css('margin-right'));
+            return $control.css({
+              'width': "" + (($controlsParentWidth / controlsCount) - horizontalMargin) + "px"
+            });
+          });
+        };
+        init();
         $self.data('carousel', {
           'currentItem': 0,
           'itemCount': itemCount,
+          'stop': function() {
+            $ul.stop(true, true);
+            $layers.stop(true, true);
+            return animationRunning = false;
+          },
           'showItem': function(index) {
-            var animationProperties, animationSettings;
+            var animationProperties, animationSettings, layerAnimationSettings;
             if (index < 0 || index >= itemCount || index === $self.data('carousel').currentItem || animationRunning) {
               return false;
             }
@@ -62,8 +103,13 @@
               'duration': opts.duration,
               'easing': opts.easing,
               'complete': function() {
-                return animationRunning = false;
+                animationRunning = false;
+                return opts.onComplete(index, $li.eq(index));
               }
+            };
+            layerAnimationSettings = {
+              'duration': opts.duration,
+              'easing': opts.easing
             };
             $ul.stop().delay(opts.delay).animate(animationProperties, animationSettings);
             $li.each(function(i) {
@@ -82,14 +128,14 @@
                   }).stop().delay($layer.data('delay')).animate({
                     'left': 0,
                     'opacity': 1
-                  }, animationSettings);
+                  }, layerAnimationSettings);
                 });
               } else {
                 animationProperties = {
                   'opacity': 0
                 };
               }
-              return $(this).stop().delay(opts.delay).animate(animationProperties, animationSettings);
+              return $(this).stop().delay(opts.delay).animate(animationProperties, layerAnimationSettings);
             });
             if (index === itemCount - 1) {
               $nextArrow.addClass('disabled');
@@ -101,17 +147,44 @@
             } else {
               $previousArrow.removeClass('disabled');
             }
+            $controls.removeClass('active').eq(index).addClass('active');
             $self.data('carousel').currentItem = index;
             return true;
+          },
+          'addItem': function($item) {
+            var $newLi;
+            $self.data('carousel').stop();
+            $newLi = $('<li />');
+            $newLi.append($item);
+            $self.data('carousel').itemCount = ++itemCount;
+            if ($self.data('carousel').currentItem === itemCount - 1) {
+              $nextArrow.addClass('disabled');
+            } else {
+              $nextArrow.removeClass('disabled');
+            }
+            if ($self.data('carousel').currentItem === 0) {
+              $previousArrow.addClass('disabled');
+            } else {
+              $previousArrow.removeClass('disabled');
+            }
+            return $ul.append($newLi);
           }
         });
         $nextArrow.click(function() {
           $self.data('carousel').showItem($self.data('carousel').currentItem + 1);
           return false;
         });
-        return $previousArrow.click(function() {
+        $previousArrow.click(function() {
           $self.data('carousel').showItem($self.data('carousel').currentItem - 1);
           return false;
+        });
+        $controls.click(function() {
+          $self.data('carousel').showItem($.inArray(this, $controls));
+          return false;
+        });
+        return $(window).bind('resize', function() {
+          $self.data('carousel').stop();
+          return init();
         });
       });
     }
