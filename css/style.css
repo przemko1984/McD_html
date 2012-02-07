@@ -533,10 +533,29 @@ input[type="text"] {
     .info-box h2{
 		margin: 0 0 0.2em;
     }
+    .info-box h1+ h2{
+		margin: 0 0 0.5em;
+    }
     .main-page .info-box p {
     	font-style: italic;
     	margin-top: 0; 
     }
+    .desserts .info-box p {
+    	font-style: italic;
+    }
+    .products .info-box{
+    	position: relative;
+    }
+    .products .info-box p{
+    	position: absolute;
+    	font-style: italic;
+    	bottom: 40px;
+    	right: 37px;
+    	width: 280px;
+    	font-size: 1.1em;
+    	margin:0;
+    }
+    
     
     .main-box {
 	  margin-bottom: 0px;		  	  
@@ -816,23 +835,87 @@ input[type="text"] {
 
 	.big-photo{
 		float: right;
-		
+		background-repeat: no-repeat;
+		background-position: right bottom;
+		height: 510px;
+    	width: 430px;
 	}
 	
 	.desserts .thumbnails {
 		float: left;
 		width: 515px;
-		margin: 40px 0 20px -13px;
 		cursor: pointer;
+		margin: 40px 0 20px -13px;
 	}
-	.desserts .thumbnails img {
-		margin: 20px 0;
+	.desserts .thumbAdjustWidth {
+		width: 540px;
+		margin: 40px 0 20px -25px;
 	}
 	
-	.thumbnails_w100{
-		width: 100%; 
+	.desserts .thumb7col {
+		width: 1060px;
 	}
-
+	.product .thumbnails {
+		margin: 0px 0 20px -13px;
+	}
+	.product .big-prd, .product .thumbnails .tile .desc{
+		display: none;
+	}
+	
+	.thumbnails .tile .big {
+		display: none;
+	}
+	
+	.thumbnails .tile {
+		float: left;
+		background-repeat: no-repeat;
+		background-position: left bottom;
+		margin-top: 20px;
+	}
+	.thumbnails+.thumbnails{
+		margin-top: 0px;
+	}
+	.thumb3col .tile  {
+		width: 165px;
+		height: 125px;
+		background-position: right bottom;
+		margin-top: 0;
+	}
+	.product .thumb3col .tile{
+		background-position: left bottom;
+		width: 200px;
+	}
+	.product .thumb4col .tile{
+		width: 150px;
+	}
+	.thumb4col .tile  {
+		width: 125px;
+		height: 125px;
+	}
+	.thumb5col .tile  {
+		width: 100px;
+		height: 145px;
+	}
+	.thumb7col .tile  {
+		width: 150px;
+		height: 145px;
+	}
+	.thumbAdjustWidth .tile{
+		height: 125px;
+	}
+		
+	.thumbnails .tile .thumb {
+		position: relative;
+		bottom: 0;
+		left: 0;
+	}
+	
+	.product {
+		background-position: right bottom;
+		background-repeat: no-repeat;
+		margin: 40px 0 20px;
+	}
+	
 /**
  * Footer styles
 **/
