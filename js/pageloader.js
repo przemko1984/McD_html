@@ -23,6 +23,17 @@ function pageload(hash) {
 		}
 		else {
 			
+			/*
+			 * 
+			 * 1 pobierz ajax
+			 * 2 zaladuj content do ukrytego
+			 * 3 sprawdz wielkość ukrytego
+			 * 4 rozrzesz tak kontener aby biuro prasowe nie nachodzilo na element
+			 * 5 zwin dotychczasowe elementy w gore/dol
+			 * 6 nasun element z gory/dolu
+			 * 
+			 */
+			
 			$.ajax({
 				  url: hash +"-ajax.html",
 				  beforeSend: function() {
@@ -32,14 +43,15 @@ function pageload(hash) {
 				  },
 				  success: function(data) {
 					  $('#main-container').append(data);
+					  $('#main-container .main-container-new').css('top':'300px');
 					  $(".tabs").tabs();
 				  },
 				  complete: function(data) {
 					  $('.main-container').animate({	    
 							top: '0', 
-						  }, 700, function() {
-							  
-						});
+						  }, 7000, function() {
+							   
+						}); 
 				  }
 			});
 			
@@ -66,11 +78,10 @@ function removeDown() {
 	$('.main-container').animate({top: '1300px' }, 500, function() { $('.main-container').remove();});
 }
 function removeUp() {
-	$('.main-container').addClass('main-container-rm').removeClass('main-container');
-	$('.main-container-rm').css('position','absoulte');
-	$('.main-container-rm').animate({top: '-800px' }, 500, function() {
-		$('.main-container-rm').remove();
-	});
+//	$('.main-container').addClass('main-container-rm').removeClass('main-container');
+//	$('.main-container-rm').animate({top: '-800px' }, 5000, function() {
+//		$('.main-container-rm').remove();
+//	});
 
 }
 function addDown() {
@@ -83,7 +94,7 @@ function addUp() {
 function pageloadCallback() {
 	$('#top-lead').animate({	    
 		top: '-160px', 
-	  }, 300, function() {		  
+	  }, 300, function() {	  
 		  
 	});
 	$('.top-container-nav').animate({	    
