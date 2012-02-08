@@ -78,7 +78,6 @@
 							$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
 							$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
 							$layer.css 'opacity': 1
-
 						
 						$controls.each (i) ->
 							$control = $ @

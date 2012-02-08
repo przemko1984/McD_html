@@ -50,7 +50,10 @@
         itemCount = $li.length;
         controlsCount = $controls.length;
         animationRunning = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> kujon
         if (itemCount > 1) {
           init = function() {
             itemWidth = $li.width();
