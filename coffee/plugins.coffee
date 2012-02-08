@@ -6,6 +6,18 @@
 	Agency: Softhis
 	Website: www.softhis.com
 	Released under the MIT License
+
+	options:
+	duration - duration in ms or a string representing jQuery-type duration
+	easing - jQuery easing. easing plugins allowed
+	speed - default speed for the layer, relative to li containing tag
+	delay - default delay in ms or a string representing jQuery-type duration
+	onAnimationComplete - function to be called after the animation. takes 2 params - index of element to be showed, and element itself
+	onAnimationInit - function to be called before the animation. takes 2 params - index of element to be showed, and element itself
+	onAjaxInit - function to be called before ajax request is made. takes 2 params - index of element to be showed, and the request string
+	onAjaxError - function to be called in case of failure of the request. takes 2 params - index of element to be showed, and the error message
+	onAjaxComplete - function to be called after successful ajax request was made. takes 2 params - index of element to be showed, and the return data
+	ajax - flag indicating if content of li tags in the carousel should be dynamically loaded. requires data-request attribute on all li elements.
 	###
 	$.extend $.fn,
 		
@@ -13,9 +25,14 @@
 			defaults = 
 				'duration': 'slow'
 				'easing': 'swing'
-				'speed': 1
+				'speed': 0
 				'delay': 0
-				'onComplete': $.noop
+				'onAnimationComplete': $.noop
+				'onAnimationInit': $.noop
+				'onAjaxInit': $.noop
+				'onAjaxError': $.noop
+				'onAjaxComplete': $.noop
+				'ajax': false
 			opts = $.extend defaults, options
 			@each ->
 				$self = $ @
@@ -87,6 +104,8 @@
 						
 						animationRunning = yes
 
+						opts.onAnimationInit index, $li.eq index
+
 						animationProperties =
 							'left': "#{-index * itemWidth}px"
 						animationSettings =
@@ -94,7 +113,7 @@
 							'easing': opts.easing
 							'complete': ->
 								animationRunning = no
-								opts.onComplete index, $li.eq index
+								opts.onAnimationComplete index, $li.eq index
 						layerAnimationSettings =
 							'duration': opts.duration
 							'easing': opts.easing
@@ -123,26 +142,46 @@
 						$self.data('carousel').currentItem = index
 						yes
 
-					'addItem': ($item) ->
+					'requestItem': (index) ->
+						return no if index < 0 or index >= itemCount or index is $self.data('carousel').currentItem or animationRunning
+
+						if opts.ajax
+							$requestedLi = $li.eq index
+							$request = $requestedLi.attr('data-request')
+							
+							opts.onAjaxInit index, $request
+
+							$.ajax $request,
+								success: (data) ->
+									$requestedLi.html $ data
+									$requestedLi.find('.carousel-layer').each ->
+										$layer = $ @ 
+										$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
+										$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
+									opts.onAjaxComplete index, data
+									$self.data('carousel').showItem index
+								error: (msg) ->
+									opts.onAjaxError index, msg
+						else
+							$self.data('carousel').showItem index
+
+					'fillItem': ($content, index) ->
+						return no if index < 0 or index >= itemCount
 						$self.data('carousel').stop()
-						$newLi = $ '<li />'
-						$newLi.append $item
 						$self.data('carousel').itemCount = ++itemCount
-						if $self.data('carousel').currentItem is itemCount - 1 then $nextArrow.addClass 'disabled' else $nextArrow.removeClass 'disabled'
-						if $self.data('carousel').currentItem is 0 then $previousArrow.addClass 'disabled' else $previousArrow.removeClass 'disabled'
-						$ul.append $newLi
+						$li.eq(index).html $content
 
 
 				# Binding events
 				$nextArrow.click ->
-					$self.data('carousel').showItem $self.data('carousel').currentItem + 1
+					$self.data('carousel').requestItem $self.data('carousel').currentItem + 1
 					no
 				$previousArrow.click ->
-					$self.data('carousel').showItem $self.data('carousel').currentItem - 1
+					$self.data('carousel').requestItem $self.data('carousel').currentItem - 1
 					no
 
 				$controls.click ->
-					$self.data('carousel').showItem $.inArray @, $controls
+					$self.data('carousel').requestItem $.inArray @, $controls
 					no
 				
 				$(window).bind 'resize', ->

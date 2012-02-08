@@ -7,6 +7,18 @@
   	Agency: Softhis
   	Website: www.softhis.com
   	Released under the MIT License
+  
+  	options:
+  	duration - duration in ms or a string representing jQuery-type duration
+  	easing - jQuery easing. easing plugins allowed
+  	speed - default speed for the layer, relative to li containing tag
+  	delay - default delay in ms or a string representing jQuery-type duration
+  	onAnimationComplete - function to be called after the animation. takes 2 params - index of element to be showed, and element itself
+  	onAnimationInit - function to be called before the animation. takes 2 params - index of element to be showed, and element itself
+  	onAjaxInit - function to be called before ajax request is made. takes 2 params - index of element to be showed, and the request string
+  	onAjaxError - function to be called in case of failure of the request. takes 2 params - index of element to be showed, and the error message
+  	onAjaxComplete - function to be called after successful ajax request was made. takes 2 params - index of element to be showed, and the return data
+  	ajax - flag indicating if content of li tags in the carousel should be dynamically loaded. requires data-request attribute on all li elements.
   */
   return $.extend($.fn, {
     carousel: function(options) {
@@ -14,9 +26,14 @@
       defaults = {
         'duration': 'slow',
         'easing': 'swing',
-        'speed': 1,
+        'speed': 0,
         'delay': 0,
-        'onComplete': $.noop
+        'onAnimationComplete': $.noop,
+        'onAnimationInit': $.noop,
+        'onAjaxInit': $.noop,
+        'onAjaxError': $.noop,
+        'onAjaxComplete': $.noop,
+        'ajax': false
       };
       opts = $.extend(defaults, options);
       return this.each(function() {
@@ -96,6 +113,7 @@
               return false;
             }
             animationRunning = true;
+            opts.onAnimationInit(index, $li.eq(index));
             animationProperties = {
               'left': "" + (-index * itemWidth) + "px"
             };
@@ -104,7 +122,7 @@
               'easing': opts.easing,
               'complete': function() {
                 animationRunning = false;
-                return opts.onComplete(index, $li.eq(index));
+                return opts.onAnimationComplete(index, $li.eq(index));
               }
             };
             layerAnimationSettings = {
@@ -151,35 +169,52 @@
             $self.data('carousel').currentItem = index;
             return true;
           },
-          'addItem': function($item) {
-            var $newLi;
+          'requestItem': function(index) {
+            var $request, $requestedLi;
+            if (index < 0 || index >= itemCount || index === $self.data('carousel').currentItem || animationRunning) {
+              return false;
+            }
+            if (opts.ajax) {
+              $requestedLi = $li.eq(index);
+              $request = $requestedLi.attr('data-request');
+              opts.onAjaxInit(index, $request);
+              return $.ajax($request, {
+                success: function(data) {
+                  $requestedLi.html($(data));
+                  $requestedLi.find('.carousel-layer').each(function() {
+                    var $layer;
+                    $layer = $(this);
+                    $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
+                    return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
+                  });
+                  opts.onAjaxComplete(index, data);
+                  return $self.data('carousel').showItem(index);
+                },
+                error: function(msg) {
+                  return opts.onAjaxError(index, msg);
+                }
+              });
+            } else {
+              return $self.data('carousel').showItem(index);
+            }
+          },
+          'fillItem': function($content, index) {
+            if (index < 0 || index >= itemCount) return false;
             $self.data('carousel').stop();
-            $newLi = $('<li />');
-            $newLi.append($item);
             $self.data('carousel').itemCount = ++itemCount;
-            if ($self.data('carousel').currentItem === itemCount - 1) {
-              $nextArrow.addClass('disabled');
-            } else {
-              $nextArrow.removeClass('disabled');
-            }
-            if ($self.data('carousel').currentItem === 0) {
-              $previousArrow.addClass('disabled');
-            } else {
-              $previousArrow.removeClass('disabled');
-            }
-            return $ul.append($newLi);
+            return $li.eq(index).html($content);
           }
         });
         $nextArrow.click(function() {
-          $self.data('carousel').showItem($self.data('carousel').currentItem + 1);
+          $self.data('carousel').requestItem($self.data('carousel').currentItem + 1);
           return false;
         });
         $previousArrow.click(function() {
-          $self.data('carousel').showItem($self.data('carousel').currentItem - 1);
+          $self.data('carousel').requestItem($self.data('carousel').currentItem - 1);
           return false;
         });
         $controls.click(function() {
-          $self.data('carousel').showItem($.inArray(this, $controls));
+          $self.data('carousel').requestItem($.inArray(this, $controls));
           return false;
         });
         return $(window).bind('resize', function() {

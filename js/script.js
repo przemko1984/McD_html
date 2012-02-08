@@ -3,7 +3,9 @@
 (function($) {
   return $(document).ready(function() {
     var $nutritionFacts, $nutritionFactsButton;
-    $('.carousel-container').carousel();
+    $('.carousel-container').carousel({
+      'ajax': true
+    });
     $('.tiled-submenu').carousel();
     $nutritionFactsButton = $('.nutrition-facts-button');
     $nutritionFacts = $('.nutrition-facts');
