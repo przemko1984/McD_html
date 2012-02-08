@@ -331,9 +331,26 @@ input[type="text"] {
           position: absolute;
         }
 
-        .no-touch li:hover > .submenu {
+        .no-touch li:hover > .submenu, li.hover > .submenu {
           display: block;
         }
+
+        .submenu-carousel {
+          height: 100%;
+          margin: 0 auto;
+          overflow: hidden;
+          position: relative;
+          width: 960px;  
+        }
+
+          .submenu-carousel .list-wrapper {
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+          }
 
         .tiled-submenu {
           background-color: #fff;
@@ -347,27 +364,59 @@ input[type="text"] {
           box-shadow:         -1px 1px 8px rgba(0, 0, 0, 0.15);
         }
 
+          #main-menu .tiled-submenu ul, #main-menu .tiled-submenu li {
+            margin: 0;
+            padding: 0;
+          }
+
+          #main-menu .tiled-submenu ul {
+            float: none;
+            height: 100%;
+          }
+
+          #main-menu .tiled-submenu li {
+            float: left;
+            height: 100%;
+            width: 960px;
+          }
+
           .tiled-submenu .tiles-container {
             height: 100%;
-            margin: 0 auto;
-            width: 1000px;
           }
 
             .tiled-submenu .tiles-container h5 {
+              background-color: #dcddde;
               font-size: 1.87em;
-              margin: .5em 0 .2em;
+              margin: 0;
+              padding: .5em 0 .2em;
               text-align: center;
             }
             
-            .tiled-submenu .tile {
+            .tiles-container .tile {
               border-bottom: 1px dashed #bcbdc0;
               float: left;
-              padding: 17px 20px 0;
               text-transform: uppercase;
-              width: 160px
             }
 
-              .tiled-submenu .tile a figcaption {
+            .no-touch .tiles-container .tile:hover {
+              background-color: #f1f2f2;
+            }
+
+              .tiles-container .tile img {
+                width: 100%;
+              }
+
+            .tiles-container.five-in-row .tile {
+              padding: 17px 16px 0;
+              width: 160px;
+            }
+
+            .tiles-container.six-in-row .tile {
+              padding: 17px 10px 0;
+              width: 140px;
+            }
+
+              .tiled-submenu a .tile figcaption {
                 color: #8c8c8c;
                 font-size: 1.3em;
                 margin: .2em 0 0 0;
@@ -402,10 +451,14 @@ input[type="text"] {
 
   #top-content {
     color: #fff;
-    height: 540px;
     overflow: hidden;
     position: relative;
     width: 100%;
+  }
+
+  .carousel-container ul {
+    margin: 0;
+    padding: 0;
   }
 
     #top-content h2 {
@@ -429,6 +482,41 @@ input[type="text"] {
       width: 100%;
     }
 
+    .no-js .carousel-controls {
+      display: none;
+    }
+
+    .carousel-controls {
+      margin: 0 auto;
+      width: 1000px
+    }
+
+      .carousel-controls li {
+        display: block;
+        float: left;
+        margin: 0 20px;
+        padding: 20px 0 0 0;
+        position: relative;
+        width: 160px;
+      }
+
+      .carousel-controls li.active:after {
+        background: url(../img/carousel-tip.png) no-repeat;
+        bottom: 100%;
+        content: '';
+        display: block;
+        height: 11px;
+        left: 50%;
+        margin: 0 0 0 -12px;
+        position: absolute;
+        width: 25px;
+      }
+
+        .carousel-controls li img {
+          border: 1px solid #c5c5c5;
+          width: 100%;
+        }
+
     .carousel-arrow {
       background-image: url(../img/carousel-arrows.png);
       background-repeat: none;
@@ -440,6 +528,10 @@ input[type="text"] {
       text-indent: -9999px;
       top: 50%;
       width: 81px;
+    }
+
+    #top-content .carousel-arrow {
+      top: 270px;
     }
 
     .carousel-arrow.disabled {
@@ -462,7 +554,7 @@ input[type="text"] {
     }
 
     .carousel {
-      height: 100%;
+      height: 540px;
       margin: 0 auto;
       overflow: hidden;
       position: relative;

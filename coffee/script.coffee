@@ -1,7 +1,8 @@
 (($) ->
 
 	$(document).ready ->
-		$('.carousel-container').carousel()
+		$('.carousel-container').carousel('ajax': true)
+		$('.tiled-submenu').carousel()
 
 		$nutritionFactsButton = $ '.nutrition-facts-button'
 		$nutritionFacts = $ '.nutrition-facts'
@@ -19,5 +20,11 @@
 				$nutritionFactsButton.removeClass 'active'
 				no
 			no
+
+		if Modernizr.touch
+			$('li').click ->
+				if $(@).children('.submenu').length
+					$(@).toggleClass('hover')
+					no
 
 )(jQuery)
