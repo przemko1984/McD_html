@@ -3,69 +3,93 @@ $(document).ready(function() {
 	$.history.init(function(hash){
 		pageload(hash);
 	});
-	
-	
 	 
+	$('#logo').click(function(){
+//		$('.main-container').animate({top: '-800px' }, 500, function() { $('.main-container').remove();});
+		removeUp();
+		return false;
+	});
+	
 });
 
 function pageload(hash) {
 	var self = this;
 	var setting = null;
 
-//	$jQ('body').prepend("<p>hash:" + hash  + "</p>"+"<p>location.hash:" + location.hash + "</p>");
-//	
-	// gupi hack, problem pojawil sie z Safari 4 jak nie wykrywa hash sprawdza jeszcze czy nie ma cos w location.hash
-	/*if($jQ.browser.safari && $jQ.browser.version < 533){
-		if(location.hash != '')
-			hash = location.hash.replace(/^#(.*)$/,'$1');
-	}*/
-	
-	
 	if (hash) {
-		
-		
-		$.ajax({
-			  url: hash +"-ajax.html",
-			  beforeSend: function() {
-				  pageloadCallback();
-				  
-			  },
-			  success: function(data){
-				  $('#main-container').html(data);
-				  $(".tabs").tabs();
-			  },
-			  complete: function(data){
-				  $('.main-container').animate({	    
-						top: '0', 
-					    //height: 'toggle'
-					  }, 500, function() {
-						   
-					});
-			  }
-		});
-		
-		
+		if(hash == 'default'){
+			setDefault();
+			
+		}
+		else {
+			
+			$.ajax({
+				  url: hash +"-ajax.html",
+				  beforeSend: function() {
+					  setNav(hash);
+					  pageloadCallback();
+					  removeUp();
+				  },
+				  success: function(data) {
+					  $('#main-container').append(data);
+					  $(".tabs").tabs();
+				  },
+				  complete: function(data) {
+					  $('.main-container').animate({	    
+							top: '0', 
+						  }, 700, function() {
+							  
+						});
+				  }
+			});
+			
+		}
 		/*$('#main-container').load(hash +"-ajax.html",
                 function(){ 
 					$(".tabs").tabs();
                 });*/
 	}
 }
+function setNav(hash) {
+	$('.top-container-nav .active').removeClass("active");
+	$('.top-container-nav a[href="#'+hash+'"]').parents('.top-container-col').addClass("active");
+}
+
+function setDefault() {
+	$('.top-container-nav .active').removeClass("active");
+	$('#top-lead').animate({top: '60px'}, 300, function() {});
+	$('.top-container-nav ').animate({ top: '240px' }, 400, function() {});
+	removeDown();
+}
+
+function removeDown() {
+	$('.main-container').animate({top: '1300px' }, 500, function() { $('.main-container').remove();});
+}
+function removeUp() {
+	$('.main-container').addClass('main-container-rm').removeClass('main-container');
+	$('.main-container-rm').css('position','absoulte');
+	$('.main-container-rm').animate({top: '-800px' }, 500, function() {
+		$('.main-container-rm').remove();
+	});
+
+}
+function addDown() {
+	
+}
+function addUp() {
+	
+}
 
 function pageloadCallback() {
 	$('#top-lead').animate({	    
 		top: '-160px', 
-	    //height: 'toggle'
 	  }, 300, function() {		  
 		  
 	});
-	$('.top-container-nav ').animate({	    
-		top: '-160px', 
-	    //height: 'toggle'
+	$('.top-container-nav').animate({	    
+		top: '60px', 
 	  }, 400, function() {
 		   
 	});
-	
-	
 	
 }

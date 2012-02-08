@@ -604,15 +604,17 @@ input[type="text"] {
       height: 100%;
       margin: 70px auto 0;
       overflow: hidden;
-      position: relative;
+      /*position: relative;*/
       width: 960px;
     }
     #top-lead {
     	margin: 0 0 40px;
-    	position: relative;
+    	position: absolute;
+    	top: 60px
     }
     .top-container-nav{
-		position: relative;
+		position: absolute;
+		top: 240px
 	}
 	.top-container-nav .dotted-border{
 		position: absolute;
@@ -664,25 +666,38 @@ input[type="text"] {
 	.top-container-nav .active .nav-arrow {
 		background-position: 0 -25px;
 	}
-	.top-container-nav .active .nav-arrow .fold{
-		display: inline;	
-	}
 	.top-container-nav .nav-arrow .fold{
 		display: none;	
 	}
-	
+	.top-container-nav .nav-arrow a{
+		padding: 10px 0;
+	}
+	.top-container-nav .active .nav-arrow .fold{
+		display: block;	
+	}
 	.top-container-nav .active .nav-arrow .expand{
 		display: none;			
 	}
 	.top-container-nav .nav-arrow .expand{
-		display: inline;	
+		display: block;	
 	}
 	
-	
-	.main-container {
+	.main-container, .main-container-rm {
 		margin: -260px 0 0 0;
 		position: relative;
 	}
+	.main-container, .main-container-rm {
+		margin: -260px 0 0 0;
+		position: relative;
+	}
+	
+	#main-container {
+		/*margin: -260px 0 0 0;
+		position: relative;
+		overflow: hidden;
+		height: 0;
+	*/}
+	
 	
 	.main-container-nav{
 		margin: 0;
@@ -707,10 +722,11 @@ input[type="text"] {
 		margin: 0;		
 	}
 	
-	.main-container h2{
+	.main-container h2,.main-container-rm h2{
 		color: #ffffff;
 		margin: 0;
 		line-height: 0.98em;
+		clear: both;
 	}
 
   #main-content {
