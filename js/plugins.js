@@ -50,6 +50,7 @@
         itemCount = $li.length;
         controlsCount = $controls.length;
         animationRunning = false;
+        if (itemCount < 2) return false;
         init = function() {
           itemWidth = $li.width();
           if ($self.data('carousel') != null) {

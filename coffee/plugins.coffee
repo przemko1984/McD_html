@@ -48,6 +48,8 @@
 				controlsCount = $controls.length
 				animationRunning = no
 
+				return no if itemCount < 2
+
 				# Initialization
 				init = ->
 					itemWidth = $li.width()
