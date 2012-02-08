@@ -54,7 +54,7 @@
 						itemWidth = $li.width()
 						
 						$self.data('carousel').currentItem = 0 if $self.data('carousel')?
-
+						
 						$ul.css
 							'width': "#{itemWidth * itemCount}px",
 							'position': 'absolute',

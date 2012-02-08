@@ -305,7 +305,6 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
   border-top: 1px solid #abadae;
   padding: 4px 10px 4px 29px;
 }
-
 .info-box input[type="text"] {
   float: left;
   width: 130px;
