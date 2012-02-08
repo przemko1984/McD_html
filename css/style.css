@@ -716,19 +716,26 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
 	}
 	
 	.main-container, .main-container-rm, .main-container-new {
-		margin: -260px 0 0 0;
+		
 		position: relative;
 	}
 	.main-container-new {
 		display: none;
 	}
+	.overflow-hidden{
+		overflow: hidden;
+	}
 	#main-container {
+		margin: 0;
 		/*margin: -260px 0 0 0;
 		position: relative;
 		overflow: hidden;
 		height: 0;
 	*/}
-	
+	.main-container-full {
+		margin: -260px 0 0 0 !important;
+	}
+
 	
 	.main-container-nav{
 		margin: 0;
