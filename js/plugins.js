@@ -181,15 +181,43 @@
               opts.onAjaxInit(index, $request);
               return $.ajax($request, {
                 success: function(data) {
-                  $requestedLi.html($(data));
-                  $requestedLi.find('.carousel-layer').each(function() {
-                    var $layer;
-                    $layer = $(this);
-                    $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
-                    return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
-                  });
-                  opts.onAjaxComplete(index, data);
-                  return $self.data('carousel').showItem(index);
+                  var $data, $img, imgCount, imgLoaded;
+                  $data = $(data);
+                  $img = $data.find('img');
+                  imgCount = $img.length;
+                  imgLoaded = 0;
+                  if (imgCount > 0) {
+                    return $img.each(function() {
+                      var $curImg, src;
+                      $curImg = $(this);
+                      src = $curImg.attr('src');
+                      return $curImg.load(function() {
+                        if (++imgLoaded >= imgCount) {
+                          $requestedLi.html($(data));
+                          $requestedLi.find('.carousel-layer').each(function() {
+                            var $layer;
+                            $layer = $(this);
+                            $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
+                            return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
+                          });
+                          opts.onAjaxComplete(index, data);
+                          return $self.data('carousel').showItem(index);
+                        }
+                      }).error(function(msg) {
+                        return opts.onAjaxError(index, msg);
+                      }).attr('src', src);
+                    });
+                  } else {
+                    $requestedLi.html($(data));
+                    $requestedLi.find('.carousel-layer').each(function() {
+                      var $layer;
+                      $layer = $(this);
+                      $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
+                      return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
+                    });
+                    opts.onAjaxComplete(index, data);
+                    return $self.data('carousel').showItem(index);
+                  }
                 },
                 error: function(msg) {
                   return opts.onAjaxError(index, msg);
@@ -198,12 +226,6 @@
             } else {
               return $self.data('carousel').showItem(index);
             }
-          },
-          'fillItem': function($content, index) {
-            if (index < 0 || index >= itemCount) return false;
-            $self.data('carousel').stop();
-            $self.data('carousel').itemCount = ++itemCount;
-            return $li.eq(index).html($content);
           }
         });
         $nextArrow.click(function() {

@@ -155,23 +155,41 @@
 
 							$.ajax $request,
 								success: (data) ->
-									$requestedLi.html $ data
-									$requestedLi.find('.carousel-layer').each ->
-										$layer = $ @ 
-										$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
-										$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
-									opts.onAjaxComplete index, data
-									$self.data('carousel').showItem index
+									$data = $ data
+									$img = $data.find 'img'
+									imgCount = $img.length
+									imgLoaded = 0
+									
+									if imgCount > 0
+										$img.each ->
+											$curImg = $ @
+											src = $curImg.attr 'src'
+											$curImg.load( ->
+												if ++imgLoaded >= imgCount
+													$requestedLi.html $ data
+													$requestedLi.find('.carousel-layer').each ->
+														$layer = $ @ 
+														$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
+														$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
+													
+													opts.onAjaxComplete index, data
+													$self.data('carousel').showItem index
+											).error( (msg) ->
+												opts.onAjaxError index, msg
+											).attr('src', src)
+									else
+										$requestedLi.html $ data
+										$requestedLi.find('.carousel-layer').each ->
+											$layer = $ @ 
+											$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
+											$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed		
+										opts.onAjaxComplete index, data
+										$self.data('carousel').showItem index
+									
 								error: (msg) ->
 									opts.onAjaxError index, msg
 						else
 							$self.data('carousel').showItem index
-
-					'fillItem': ($content, index) ->
-						return no if index < 0 or index >= itemCount
-						$self.data('carousel').stop()
-						$self.data('carousel').itemCount = ++itemCount
-						$li.eq(index).html $content
 
 
 				# Binding events
