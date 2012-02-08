@@ -285,13 +285,10 @@ header {
 input[type="text"] {
   background-color: #f4f4f4;
   border: 0;
-  border-left: 1px solid #6b6d6e\9;
-  border-top: 1px solid #6b6d6e\9;
   color: #a1a1a1;
   font-size: 1.08em;
   outline: 0;
   padding: 5px 10px 4px 30px;
-  padding: 4px 10px 4px 29px\9;
   
   -webkit-box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.2);
   -moz-box-shadow:    inset 1px 2px 5px rgba(0, 0, 0, 0.2);
@@ -301,6 +298,12 @@ input[type="text"] {
 
 input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placeholder {
   color: #c1c1c1;
+}
+
+.ie8 input[type="text"] {
+  border-left: 1px solid #adadae;
+  border-top: 1px solid #abadae;
+  padding: 4px 10px 4px 29px;
 }
 
 .info-box input[type="text"] {
