@@ -43,7 +43,7 @@ function pageload(hash) {
 				  },
 				  success: function(data) {
 					  $('#main-container').append(data);
-					  $('#main-container .main-container-new').css('top':'300px');
+					  $('#main-container .main-container-new').css('top','300px');
 					  $(".tabs").tabs();
 				  },
 				  complete: function(data) {
