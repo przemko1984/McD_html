@@ -221,7 +221,7 @@ h1, h2, h3, h4, h5 {
   text-transform: uppercase;
 }
 
-h1, .main-page h2 {
+h1, .main-page h2, .about-page h2  {
   font-size: 4.62em;
 }
 
@@ -430,7 +430,7 @@ input[type="text"] {
 #main {
   background-color: #fff;
 }
-.main-page #main {
+.main-page #main, .about-page #main {
   background-color: #F1F2F2;
 }
 
@@ -456,6 +456,9 @@ input[type="text"] {
     width: 100%;
   }
 
+  .about-page #top-content{
+  	height: 540px;
+  }
   .carousel-container ul {
     margin: 0;
     padding: 0;
@@ -599,12 +602,16 @@ input[type="text"] {
 
    .top-container {
       height: 100%;
-      margin: 75px auto 0;
+      margin: 70px auto 0;
       overflow: hidden;
       position: relative;
       width: 960px;
     }
-	.top-container-nav{
+    #top-lead {
+    	margin: 0 0 40px;
+    	position: relative;
+    }
+    .top-container-nav{
 		position: relative;
 	}
 	.top-container-nav .dotted-border{
@@ -627,7 +634,7 @@ input[type="text"] {
 	}
 	#top-content .top-container-nav .top-container-col p {
 		margin: 40px 0 0 0;
-		font-size: 1.28em;
+		font-size: 1.18em;
 	}
 
 	#top-content .top-container h1{
@@ -657,14 +664,30 @@ input[type="text"] {
 	.top-container-nav .active .nav-arrow {
 		background-position: 0 -25px;
 	}
+	.top-container-nav .active .nav-arrow .fold{
+		display: inline;	
+	}
+	.top-container-nav .nav-arrow .fold{
+		display: none;	
+	}
+	
+	.top-container-nav .active .nav-arrow .expand{
+		display: none;			
+	}
+	.top-container-nav .nav-arrow .expand{
+		display: inline;	
+	}
+	
 	
 	.main-container {
-		margin: -220px 0 0 0;
+		margin: -260px 0 0 0;
+		position: relative;
 	}
 	
 	.main-container-nav{
 		margin: 0;
 		padding: 0;
+		margin: 0 0 40px;
 	}
 	
 	.main-container-nav li{
@@ -1105,6 +1128,7 @@ input[type="text"] {
 		background-repeat: no-repeat;
 		margin: 40px 0;
 	}
+	
 	
 /**
  * Footer styles

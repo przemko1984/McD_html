@@ -36,7 +36,7 @@
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
-<body class="main-page">
+<body class="about-page">
 
   <div id="container">
     <header>
@@ -164,16 +164,19 @@
         <img class="carousel-bg" src="img/content/black-bg.png" alt="Carousel background" />
 		
 		<div class="top-container">
-			<!--
-			<h1>Wszystko co chcesz o nas wiedzieć</h2>
-			<h2>ale boisz się zapytać</h1>
-			-->
+			<div id="top-lead">
+				<h1>Wszystko co chcesz o nas wiedzieć</h1>
+				<h2>ale boisz się zapytać</h1>
+			</div>
 			<div class="top-container-nav clearfix">
 				<div class="dotted-border">&nbsp;</div>
 				<div class="top-container-col active">
 					<h3>Kim Jesteśmy?</h3>
 					<p>McDonald's w Polsce i na świecie. Skąd się wywodzimy, jak działamy, kogo zatrudniamy i wiele więcej.</p>
-					<div class="nav-arrow ir"><a href="#">rozwiń</a></div>
+					<div class="nav-arrow">
+						<a href="#about-us" class="expand ir">rozwiń</a>
+						<a href="#defult" class="fold ir">zwiń</a>
+					</div>					
 				</div>
 				<div class="top-container-col">
 					<h3>Kim Jesteśmy?</h3>
@@ -197,34 +200,40 @@
       </div>
 
       <div id="main-content">
+      	<div id="main-container">
+		<!-- 
 		<div class="main-container">
 			<h2>McDonald's Polska</h1>
 			<ul class="main-container-nav clearfix">
-				<li class="active"><a href="#"><h3>O Firmie</h3></a></li>
-				<li><a href="#"><h3>Historia</h3></a></li>
+				<li class="active"><a href="#about-us"><h3>O Firmie</h3></a></li>
+				<li><a href="#history"><h3>Historia</h3></a></li>
 			</ul>
-		
-		
-			<div id="tabs">
+				
+			<div id="about-us-tabs" class="tabs">
 				<ul>
-					<li><a href="#tabs-1">Nunc tincidunt</a></li>
-					<li><a href="#tabs-2">Proin dolor</a></li>
-					<li><a href="#tabs-3">Aenean lacinia</a></li>
+					<li><h4><a href="#about-us-tabs-1">McDonald's w Polsce</a></h4></li>
+					<li><h4><a href="#about-us-tabs-2">Oferta</a></h4></li>
+					<li><h4><a href="#about-us-tabs-3">Surowce</a></h4></li>
+					<li><h4><a href="#about-us-tabs-4">Zatrudnienie</a></h4></li>
 				</ul>
-				<div id="tabs-1">
+				<div id="about-us-tabs-1">
 					<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus. Curabitur nec arcu. Donec sollicitudin mi sit amet mauris. Nam elementum quam ullamcorper ante. Etiam aliquet massa et lorem. Mauris dapibus lacus auctor risus. Aenean tempor ullamcorper leo. Vivamus sed magna quis ligula eleifend adipiscing. Duis orci. Aliquam sodales tortor vitae ipsum. Aliquam nulla. Duis aliquam molestie erat. Ut et mauris vel pede varius sollicitudin. Sed ut dolor nec orci tincidunt interdum. Phasellus ipsum. Nunc tristique tempus lectus.</p>
 				</div>
-				<div id="tabs-2">
+				<div id="about-us-tabs-2">
 					<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
 				</div>
-				<div id="tabs-3">
+				<div id="about-us-tabs-3">
+					<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+					<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+				</div>
+				<div id="about-us-tabs-4">
 					<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
 					<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
 				</div>
 			</div>
-			
 		</div>
-		
+		-->
+		</div>
 		
 		<div class="press-room top-border clearfix">
 		  <div class="heading">
@@ -292,9 +301,11 @@
 
   <!-- scripts concatenated and minified via ant build script-->
   <script defer src="js/libs/jquery-ui-1.8.17.custom.min.js"></script>
+  <script defer src="js/libs/jquery.history.js"></script>
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
   <script defer src="js/script_2.js"></script>
+  <script defer src="js/pageloader.js"></script>
   <!-- end scripts-->
 
 	
