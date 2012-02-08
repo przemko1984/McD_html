@@ -41,6 +41,7 @@ $(document).ready(function() {
 		  }
 	);
 	
+	 $("#tabs").tabs();
 });
 
 /*
@@ -51,7 +52,7 @@ function setHeightBigP() {
 	$('.thumbnails .tile .big').each(function() {
 		if(bp_div_height < $(this).height()) bp_div_height = $(this).height();		
 	});
-	if (bp_div_height > 0) $('.big-photo').css('height',bp_div_height+'px');
+	if (bp_div_height > 0) $('.big-photo').css('min-height',bp_div_height+'px');
 }
 
 function setHeightProduct() {
@@ -59,5 +60,5 @@ function setHeightProduct() {
 	$('.product .thumbnails .tile .big').each(function() {
 		if(div_height < $(this).height()) div_height = $(this).height();		
 	});
-	if (div_height > 0) $('.product').css('height',div_height+'px');
+	if (div_height > 0) $('.product').css('min-height',div_height+'px');
 }

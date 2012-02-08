@@ -381,12 +381,17 @@ input[type="text"] {
 #main {
   background-color: #fff;
 }
+.main-page #main {
+  background-color: #F1F2F2;
+}
 
   .top-border {
     border-top: 1px dashed #bcbdc0;
     margin: 40px auto 0;
     padding: 40px 0;
   }
+  
+  
 
   .top-border+.top-border{
 	 margin-top: 0;	 
@@ -500,6 +505,99 @@ input[type="text"] {
                 top: 0;
               }
 
+   .top-container {
+      height: 100%;
+      margin: 75px auto 0;
+      overflow: hidden;
+      position: relative;
+      width: 960px;
+    }
+	.top-container-nav{
+		position: relative;
+	}
+	.top-container-nav .dotted-border{
+		position: absolute;
+	    border-bottom: 1px dashed #727577;
+	    height: 60px;
+	    width: 100%;
+	}
+	.top-container-nav .top-container-col{
+		float: left;
+		width: 200px;
+		padding: 0 40px 0 0;
+		color: #999DA0
+	}
+	.top-container-nav .active {
+		color: #ffffff;
+	}
+	.top-container-nav .top-container-col h3{
+		margin:0;
+	}
+	#top-content .top-container-nav .top-container-col p {
+		margin: 40px 0 0 0;
+		font-size: 1.28em;
+	}
+
+	#top-content .top-container h1{
+		color: #999DA0;
+		margin: 0;
+		font-size: 3em;
+		line-height: 1em;
+	}
+	
+	#top-content .top-container h2{
+		margin: 0;
+		font-size: 5.8em;
+	}
+	
+	.top-container-nav .nav-arrow {
+		text-align: center;
+	}
+	
+	.top-container-nav .nav-arrow {
+		background: transparent url(../img/top-container-arrows.png) no-repeat top left;
+		width: 26px;
+		height: 25px;
+		margin: 30px auto;
+		cursor: pointer;
+	}
+	
+	.top-container-nav .active .nav-arrow {
+		background-position: 0 -25px;
+	}
+	
+	.main-container {
+		margin: -220px 0 0 0;
+	}
+	
+	.main-container-nav{
+		margin: 0;
+		padding: 0;
+	}
+	
+	.main-container-nav li{
+		float: left;
+	    list-style: none outside none;
+	    width: 130px;
+	    color: #999DA0;
+	}
+	.main-container-nav li.active {
+		color: #ffffff;
+	}
+	.main-container-nav li a{
+		color: inherit;
+		text-decoration: none;		
+	}
+	.main-container-nav li h3{
+		margin: 0;		
+	}
+	
+	.main-container h2{
+		color: #ffffff;
+		margin: 0;
+		line-height: 0.98em;
+	}
+
   #main-content {
     margin: 40px auto 0;
     width: 960px;
@@ -553,7 +651,7 @@ input[type="text"] {
     	right: 37px;
     	width: 280px;
     	font-size: 1.1em;
-    	margin:0;
+    	margin: 0;
     }
     
     
@@ -913,7 +1011,7 @@ input[type="text"] {
 	.product {
 		background-position: right bottom;
 		background-repeat: no-repeat;
-		margin: 40px 0 20px;
+		margin: 40px 0;
 	}
 	
 /**
