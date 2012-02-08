@@ -50,7 +50,10 @@
         itemCount = $li.length;
         controlsCount = $controls.length;
         animationRunning = false;
+<<<<<<< .merge_file_a20816
 
+=======
+>>>>>>> .merge_file_a20776
         if (itemCount > 1) {
           init = function() {
             itemWidth = $li.width();

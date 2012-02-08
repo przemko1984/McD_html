@@ -54,6 +54,7 @@
 						itemWidth = $li.width()
 						
 						$self.data('carousel').currentItem = 0 if $self.data('carousel')?
+<<<<<<< .merge_file_a14412
 						
 						$ul.css
 							'width': "#{itemWidth * itemCount}px",
@@ -61,6 +62,15 @@
 							'left': 0,
 							'top': 0
 
+=======
+
+						$ul.css
+							'width': "#{itemWidth * itemCount}px",
+							'position': 'absolute',
+							'left': 0,
+							'top': 0
+
+>>>>>>> .merge_file_a14460
 						if not $self.find('.list-wrapper').length
 							$ul.wrap $ '<div />',
 								'class': 'list-wrapper'
@@ -79,6 +89,7 @@
 							$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
 							$layer.css 'opacity': 1
 
+<<<<<<< .merge_file_a14412
 						
 						$controls.each (i) ->
 							$control = $ @
@@ -87,6 +98,16 @@
 							horizontalMargin += parseInt $control.css('margin-right')
 							$control.css 'width': "#{($controlsParentWidth/controlsCount) - horizontalMargin}px"
 						
+=======
+						
+						$controls.each (i) ->
+							$control = $ @
+							if i is 0 then $control.addClass 'active' else $control.removeClass 'active'
+							horizontalMargin = parseInt $control.css('margin-left')
+							horizontalMargin += parseInt $control.css('margin-right')
+							$control.css 'width': "#{($controlsParentWidth/controlsCount) - horizontalMargin}px"
+						
+>>>>>>> .merge_file_a14460
 					init()
 
 					# Object containing carousel API
