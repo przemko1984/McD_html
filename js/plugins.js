@@ -99,6 +99,7 @@
                 'width': "" + (($controlsParentWidth / controlsCount) - horizontalMargin) + "px"
               });
             });
+<<<<<<< HEAD
           };
           init();
           $self.data('carousel', {
@@ -228,6 +229,7 @@
                 return $self.data('carousel').showItem(index);
               }
             }
+<<<<<<< HEAD
           });
           $nextArrow.click(function() {
             $self.data('carousel').requestItem($self.data('carousel').currentItem + 1);
@@ -246,6 +248,26 @@
             return init();
           });
         }
+=======
+          }
+        });
+        $nextArrow.click(function() {
+          $self.data('carousel').requestItem($self.data('carousel').currentItem + 1);
+          return false;
+        });
+        $previousArrow.click(function() {
+          $self.data('carousel').requestItem($self.data('carousel').currentItem - 1);
+          return false;
+        });
+        $controls.click(function() {
+          $self.data('carousel').requestItem($.inArray(this, $controls));
+          return false;
+        });
+        return $(window).bind('resize', function() {
+          $self.data('carousel').stop();
+          return init();
+        });
+>>>>>>> dodane preloadowanie img w ajaxowym contencie
       });
     }
   });
