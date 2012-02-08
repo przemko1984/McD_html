@@ -50,7 +50,10 @@
         itemCount = $li.length;
         controlsCount = $controls.length;
         animationRunning = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> dodane preloadowanie img w ajaxowym contencie
         if (itemCount > 1) {
           init = function() {
             itemWidth = $li.width();
@@ -100,6 +103,9 @@
               });
             });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dodane preloadowanie img w ajaxowym contencie
           };
           init();
           $self.data('carousel', {
@@ -126,6 +132,7 @@
                 'complete': function() {
                   animationRunning = false;
                   return opts.onAnimationComplete(index, $li.eq(index));
+<<<<<<< HEAD
                 }
               };
               layerAnimationSettings = {
@@ -230,6 +237,9 @@
               }
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> dodane preloadowanie img w ajaxowym contencie
           });
           $nextArrow.click(function() {
             $self.data('carousel').requestItem($self.data('carousel').currentItem + 1);
@@ -248,6 +258,7 @@
             return init();
           });
         }
+<<<<<<< HEAD
 =======
           }
         });
@@ -267,6 +278,8 @@
           $self.data('carousel').stop();
           return init();
         });
+>>>>>>> dodane preloadowanie img w ajaxowym contencie
+=======
 >>>>>>> dodane preloadowanie img w ajaxowym contencie
       });
     }
