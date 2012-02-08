@@ -43,14 +43,15 @@ function pageload(hash) {
 				  },
 				  success: function(data) {
 					  $('#main-container').append(data);
-					  $('#main-container .main-container-new').css('top','300px');
 					  $(".tabs").tabs();
+					  $('#main-container .main-container-new').css('top','300px');
+					  $('#main-container .main-container-new').css('display','block');
 				  },
 				  complete: function(data) {
-					  $('.main-container').animate({	    
+					  $('.main-container-new').animate({	    
 							top: '0', 
-						  }, 7000, function() {
-							   
+						  }, 700, function() {
+							  $('.main-container-new').addClass('main-container').removeClass('main-container-new');
 						}); 
 				  }
 			});
@@ -78,10 +79,10 @@ function removeDown() {
 	$('.main-container').animate({top: '1300px' }, 500, function() { $('.main-container').remove();});
 }
 function removeUp() {
-//	$('.main-container').addClass('main-container-rm').removeClass('main-container');
-//	$('.main-container-rm').animate({top: '-800px' }, 5000, function() {
-//		$('.main-container-rm').remove();
-//	});
+	$('.main-container').addClass('main-container-rm').removeClass('main-container');
+	$('.main-container-rm').animate({top: '-800px' }, 500, function() {
+		$('.main-container-rm').remove();
+	});
 
 }
 function addDown() {
