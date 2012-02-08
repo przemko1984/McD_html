@@ -50,177 +50,201 @@
         itemCount = $li.length;
         controlsCount = $controls.length;
         animationRunning = false;
-        init = function() {
-          itemWidth = $li.width();
-          if ($self.data('carousel') != null) {
-            $self.data('carousel').currentItem = 0;
-          }
-          $ul.css({
-            'width': "" + (itemWidth * itemCount) + "px",
-            'position': 'absolute',
-            'left': 0,
-            'top': 0
-          });
-          if (!$self.find('.list-wrapper').length) {
-            $ul.wrap($('<div />', {
-              'class': 'list-wrapper'
-            }));
-          }
-          $li.css({
-            'opacity': 1
-          }).filter(':not(:first)').css({
-            'opacity': 0
-          });
-          $previousArrow.addClass('disabled');
-          $nextArrow.removeClass('disabled');
-          if (itemCount < 2) $nextArrow.addClass('disabled');
-          $layers.each(function() {
-            var $layer;
-            $layer = $(this);
-            $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
-            $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
-            return $layer.css({
+        if (itemCount > 1) {
+          init = function() {
+            itemWidth = $li.width();
+            if ($self.data('carousel') != null) {
+              $self.data('carousel').currentItem = 0;
+            }
+            $ul.css({
+              'width': "" + (itemWidth * itemCount) + "px",
+              'position': 'absolute',
+              'left': 0,
+              'top': 0
+            });
+            if (!$self.find('.list-wrapper').length) {
+              $ul.wrap($('<div />', {
+                'class': 'list-wrapper'
+              }));
+            }
+            $li.css({
               'opacity': 1
+            }).filter(':not(:first)').css({
+              'opacity': 0
             });
-          });
-          return $controls.each(function(i) {
-            var $control, horizontalMargin;
-            $control = $(this);
-            if (i === 0) {
-              $control.addClass('active');
-            } else {
-              $control.removeClass('active');
-            }
-            horizontalMargin = parseInt($control.css('margin-left'));
-            horizontalMargin += parseInt($control.css('margin-right'));
-            return $control.css({
-              'width': "" + (($controlsParentWidth / controlsCount) - horizontalMargin) + "px"
+            $previousArrow.addClass('disabled');
+            $nextArrow.removeClass('disabled');
+            if (itemCount < 2) $nextArrow.addClass('disabled');
+            $layers.each(function() {
+              var $layer;
+              $layer = $(this);
+              $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
+              $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
+              return $layer.css({
+                'opacity': 1
+              });
             });
-          });
-        };
-        init();
-        $self.data('carousel', {
-          'currentItem': 0,
-          'itemCount': itemCount,
-          'stop': function() {
-            $ul.stop(true, true);
-            $layers.stop(true, true);
-            return animationRunning = false;
-          },
-          'showItem': function(index) {
-            var animationProperties, animationSettings, layerAnimationSettings;
-            if (index < 0 || index >= itemCount || index === $self.data('carousel').currentItem || animationRunning) {
-              return false;
-            }
-            animationRunning = true;
-            opts.onAnimationInit(index, $li.eq(index));
-            animationProperties = {
-              'left': "" + (-index * itemWidth) + "px"
-            };
-            animationSettings = {
-              'duration': opts.duration,
-              'easing': opts.easing,
-              'complete': function() {
-                animationRunning = false;
-                return opts.onAnimationComplete(index, $li.eq(index));
-              }
-            };
-            layerAnimationSettings = {
-              'duration': opts.duration,
-              'easing': opts.easing
-            };
-            $ul.stop().delay(opts.delay).animate(animationProperties, animationSettings);
-            $li.each(function(i) {
-              var direction;
-              if (i === index) {
-                animationProperties = {
-                  'opacity': 1
-                };
-                direction = $self.data('carousel').currentItem < index ? 1 : -1;
-                $(this).find('.carousel-layer').each(function() {
-                  var $layer;
-                  $layer = $(this);
-                  return $layer.css({
-                    'left': "" + (direction * $layer.data('speed') * 100) + "%",
-                    'opacity': 0
-                  }).stop().delay($layer.data('delay')).animate({
-                    'left': 0,
-                    'opacity': 1
-                  }, layerAnimationSettings);
-                });
+            return $controls.each(function(i) {
+              var $control, horizontalMargin;
+              $control = $(this);
+              if (i === 0) {
+                $control.addClass('active');
               } else {
-                animationProperties = {
-                  'opacity': 0
-                };
+                $control.removeClass('active');
               }
-              return $(this).stop().delay(opts.delay).animate(animationProperties, layerAnimationSettings);
+              horizontalMargin = parseInt($control.css('margin-left'));
+              horizontalMargin += parseInt($control.css('margin-right'));
+              return $control.css({
+                'width': "" + (($controlsParentWidth / controlsCount) - horizontalMargin) + "px"
+              });
             });
-            if (index === itemCount - 1) {
-              $nextArrow.addClass('disabled');
-            } else {
-              $nextArrow.removeClass('disabled');
-            }
-            if (index === 0) {
-              $previousArrow.addClass('disabled');
-            } else {
-              $previousArrow.removeClass('disabled');
-            }
-            $controls.removeClass('active').eq(index).addClass('active');
-            $self.data('carousel').currentItem = index;
-            return true;
-          },
-          'requestItem': function(index) {
-            var $request, $requestedLi;
-            if (index < 0 || index >= itemCount || index === $self.data('carousel').currentItem || animationRunning) {
-              return false;
-            }
-            if (opts.ajax) {
-              $requestedLi = $li.eq(index);
-              $request = $requestedLi.attr('data-request');
-              opts.onAjaxInit(index, $request);
-              return $.ajax($request, {
-                success: function(data) {
-                  $requestedLi.html($(data));
-                  $requestedLi.find('.carousel-layer').each(function() {
+          };
+          init();
+          $self.data('carousel', {
+            'currentItem': 0,
+            'itemCount': itemCount,
+            'stop': function() {
+              $ul.stop(true, true);
+              $layers.stop(true, true);
+              return animationRunning = false;
+            },
+            'showItem': function(index) {
+              var animationProperties, animationSettings, layerAnimationSettings;
+              if (index < 0 || index >= itemCount || index === $self.data('carousel').currentItem || animationRunning) {
+                return false;
+              }
+              animationRunning = true;
+              opts.onAnimationInit(index, $li.eq(index));
+              animationProperties = {
+                'left': "" + (-index * itemWidth) + "px"
+              };
+              animationSettings = {
+                'duration': opts.duration,
+                'easing': opts.easing,
+                'complete': function() {
+                  animationRunning = false;
+                  return opts.onAnimationComplete(index, $li.eq(index));
+                }
+              };
+              layerAnimationSettings = {
+                'duration': opts.duration,
+                'easing': opts.easing
+              };
+              $ul.stop().delay(opts.delay).animate(animationProperties, animationSettings);
+              $li.each(function(i) {
+                var direction;
+                if (i === index) {
+                  animationProperties = {
+                    'opacity': 1
+                  };
+                  direction = $self.data('carousel').currentItem < index ? 1 : -1;
+                  $(this).find('.carousel-layer').each(function() {
                     var $layer;
                     $layer = $(this);
-                    $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
-                    return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
+                    return $layer.css({
+                      'left': "" + (direction * $layer.data('speed') * 100) + "%",
+                      'opacity': 0
+                    }).stop().delay($layer.data('delay')).animate({
+                      'left': 0,
+                      'opacity': 1
+                    }, layerAnimationSettings);
                   });
-                  opts.onAjaxComplete(index, data);
-                  return $self.data('carousel').showItem(index);
-                },
-                error: function(msg) {
-                  return opts.onAjaxError(index, msg);
+                } else {
+                  animationProperties = {
+                    'opacity': 0
+                  };
                 }
+                return $(this).stop().delay(opts.delay).animate(animationProperties, layerAnimationSettings);
               });
-            } else {
-              return $self.data('carousel').showItem(index);
+              if (index === itemCount - 1) {
+                $nextArrow.addClass('disabled');
+              } else {
+                $nextArrow.removeClass('disabled');
+              }
+              if (index === 0) {
+                $previousArrow.addClass('disabled');
+              } else {
+                $previousArrow.removeClass('disabled');
+              }
+              $controls.removeClass('active').eq(index).addClass('active');
+              $self.data('carousel').currentItem = index;
+              return true;
+            },
+            'requestItem': function(index) {
+              var $request, $requestedLi;
+              if (index < 0 || index >= itemCount || index === $self.data('carousel').currentItem || animationRunning) {
+                return false;
+              }
+              if (opts.ajax) {
+                $requestedLi = $li.eq(index);
+                $request = $requestedLi.attr('data-request');
+                opts.onAjaxInit(index, $request);
+                return $.ajax($request, {
+                  success: function(data) {
+                    var $data, $img, imgCount, imgLoaded;
+                    $data = $(data);
+                    $img = $data.find('img');
+                    imgCount = $img.length;
+                    imgLoaded = 0;
+                    if (imgCount > 0) {
+                      return $img.each(function() {
+                        var $curImg, src;
+                        $curImg = $(this);
+                        src = $curImg.attr('src');
+                        return $curImg.load(function() {
+                          if (++imgLoaded >= imgCount) {
+                            $requestedLi.html($(data));
+                            $requestedLi.find('.carousel-layer').each(function() {
+                              var $layer;
+                              $layer = $(this);
+                              $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
+                              return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
+                            });
+                            opts.onAjaxComplete(index, data);
+                            return $self.data('carousel').showItem(index);
+                          }
+                        }).error(function(msg) {
+                          return opts.onAjaxError(index, msg);
+                        }).attr('src', src);
+                      });
+                    } else {
+                      $requestedLi.html($(data));
+                      $requestedLi.find('.carousel-layer').each(function() {
+                        var $layer;
+                        $layer = $(this);
+                        $layer.data('delay', $layer.attr('data-delay') ? parseInt($layer.attr('data-delay')) : opts.delay);
+                        return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
+                      });
+                      opts.onAjaxComplete(index, data);
+                      return $self.data('carousel').showItem(index);
+                    }
+                  },
+                  error: function(msg) {
+                    return opts.onAjaxError(index, msg);
+                  }
+                });
+              } else {
+                return $self.data('carousel').showItem(index);
+              }
             }
-          },
-          'fillItem': function($content, index) {
-            if (index < 0 || index >= itemCount) return false;
+          });
+          $nextArrow.click(function() {
+            $self.data('carousel').requestItem($self.data('carousel').currentItem + 1);
+            return false;
+          });
+          $previousArrow.click(function() {
+            $self.data('carousel').requestItem($self.data('carousel').currentItem - 1);
+            return false;
+          });
+          $controls.click(function() {
+            $self.data('carousel').requestItem($.inArray(this, $controls));
+            return false;
+          });
+          return $(window).bind('resize', function() {
             $self.data('carousel').stop();
-            $self.data('carousel').itemCount = ++itemCount;
-            return $li.eq(index).html($content);
-          }
-        });
-        $nextArrow.click(function() {
-          $self.data('carousel').requestItem($self.data('carousel').currentItem + 1);
-          return false;
-        });
-        $previousArrow.click(function() {
-          $self.data('carousel').requestItem($self.data('carousel').currentItem - 1);
-          return false;
-        });
-        $controls.click(function() {
-          $self.data('carousel').requestItem($.inArray(this, $controls));
-          return false;
-        });
-        return $(window).bind('resize', function() {
-          $self.data('carousel').stop();
-          return init();
-        });
+            return init();
+          });
+        }
       });
     }
   });

@@ -47,145 +47,164 @@
 				itemCount = $li.length
 				controlsCount = $controls.length
 				animationRunning = no
-
-				# Initialization
-				init = ->
-					itemWidth = $li.width()
-					
-					$self.data('carousel').currentItem = 0 if $self.data('carousel')?
-
-					$ul.css
-						'width': "#{itemWidth * itemCount}px",
-						'position': 'absolute',
-						'left': 0,
-						'top': 0
-
-					if not $self.find('.list-wrapper').length
-						$ul.wrap $ '<div />',
-							'class': 'list-wrapper'
-
-					$li.css('opacity': 1).filter(':not(:first)').css
-						'opacity': 0
-
-
-					$previousArrow.addClass 'disabled'
-					$nextArrow.removeClass('disabled')
-					$nextArrow.addClass 'disabled' if itemCount < 2
-
-					$layers.each ->
-						$layer = $ @ 
-						$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
-						$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
-						$layer.css 'opacity': 1
-
-					
-					$controls.each (i) ->
-						$control = $ @
-						if i is 0 then $control.addClass 'active' else $control.removeClass 'active'
-						horizontalMargin = parseInt $control.css('margin-left')
-						horizontalMargin += parseInt $control.css('margin-right')
-						$control.css 'width': "#{($controlsParentWidth/controlsCount) - horizontalMargin}px"
-					
-				init()
-
-				# Object containing carousel API
-				$self.data 'carousel',
-					'currentItem': 0
-
-					'itemCount': itemCount
-
-					'stop': ->
-						$ul.stop true, true
-						$layers.stop true, true
-						animationRunning = no
-
-					'showItem': (index) ->
-						return no if index < 0 or index >= itemCount or index is $self.data('carousel').currentItem or animationRunning
-						
-						animationRunning = yes
-
-						opts.onAnimationInit index, $li.eq index
-
-						animationProperties =
-							'left': "#{-index * itemWidth}px"
-						animationSettings =
-							'duration': opts.duration
-							'easing': opts.easing
-							'complete': ->
-								animationRunning = no
-								opts.onAnimationComplete index, $li.eq index
-						layerAnimationSettings =
-							'duration': opts.duration
-							'easing': opts.easing
-						
-						$ul.stop().delay(opts.delay).animate animationProperties, animationSettings
-						
-						$li.each (i) ->
-							if i is index
-								animationProperties =
-									'opacity': 1
-								direction = if $self.data('carousel').currentItem < index then 1 else -1
-								$(@).find('.carousel-layer').each ->
-									$layer = $ @
-									$layer.css('left': "#{direction * $layer.data('speed') * 100}%", 'opacity': 0).stop().delay($layer.data 'delay').animate ('left': 0, 'opacity': 1), layerAnimationSettings
-									
-							else
-								animationProperties =
-									'opacity': 0
-							$(@).stop().delay(opts.delay).animate animationProperties, layerAnimationSettings
-													
-						if index is itemCount - 1 then $nextArrow.addClass 'disabled' else $nextArrow.removeClass 'disabled'
-						if index is 0 then $previousArrow.addClass 'disabled' else $previousArrow.removeClass 'disabled'
-						
-						$controls.removeClass('active').eq(index).addClass 'active'
-
-						$self.data('carousel').currentItem = index
-						yes
-
-					'requestItem': (index) ->
-						return no if index < 0 or index >= itemCount or index is $self.data('carousel').currentItem or animationRunning
-
-						if opts.ajax
-							$requestedLi = $li.eq index
-							$request = $requestedLi.attr('data-request')
-							
-							opts.onAjaxInit index, $request
-
-							$.ajax $request,
-								success: (data) ->
-									$requestedLi.html $ data
-									$requestedLi.find('.carousel-layer').each ->
-										$layer = $ @ 
-										$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
-										$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
-									opts.onAjaxComplete index, data
-									$self.data('carousel').showItem index
-								error: (msg) ->
-									opts.onAjaxError index, msg
-						else
-							$self.data('carousel').showItem index
-
-					'fillItem': ($content, index) ->
-						return no if index < 0 or index >= itemCount
-						$self.data('carousel').stop()
-						$self.data('carousel').itemCount = ++itemCount
-						$li.eq(index).html $content
-
-
-				# Binding events
-				$nextArrow.click ->
-					$self.data('carousel').requestItem $self.data('carousel').currentItem + 1
-					no
-				$previousArrow.click ->
-					$self.data('carousel').requestItem $self.data('carousel').currentItem - 1
-					no
-
-				$controls.click ->
-					$self.data('carousel').requestItem $.inArray @, $controls
-					no
 				
-				$(window).bind 'resize', ->
-					$self.data('carousel').stop()
+				if itemCount > 1
+					# Initialization
+					init = ->
+						itemWidth = $li.width()
+						
+						$self.data('carousel').currentItem = 0 if $self.data('carousel')?
+
+						$ul.css
+							'width': "#{itemWidth * itemCount}px",
+							'position': 'absolute',
+							'left': 0,
+							'top': 0
+
+						if not $self.find('.list-wrapper').length
+							$ul.wrap $ '<div />',
+								'class': 'list-wrapper'
+
+						$li.css('opacity': 1).filter(':not(:first)').css
+							'opacity': 0
+
+
+						$previousArrow.addClass 'disabled'
+						$nextArrow.removeClass('disabled')
+						$nextArrow.addClass 'disabled' if itemCount < 2
+
+						$layers.each ->
+							$layer = $ @ 
+							$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
+							$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
+							$layer.css 'opacity': 1
+
+						
+						$controls.each (i) ->
+							$control = $ @
+							if i is 0 then $control.addClass 'active' else $control.removeClass 'active'
+							horizontalMargin = parseInt $control.css('margin-left')
+							horizontalMargin += parseInt $control.css('margin-right')
+							$control.css 'width': "#{($controlsParentWidth/controlsCount) - horizontalMargin}px"
+						
 					init()
+
+					# Object containing carousel API
+					$self.data 'carousel',
+						'currentItem': 0
+
+						'itemCount': itemCount
+
+						'stop': ->
+							$ul.stop true, true
+							$layers.stop true, true
+							animationRunning = no
+
+						'showItem': (index) ->
+							return no if index < 0 or index >= itemCount or index is $self.data('carousel').currentItem or animationRunning
+							
+							animationRunning = yes
+
+							opts.onAnimationInit index, $li.eq index
+
+							animationProperties =
+								'left': "#{-index * itemWidth}px"
+							animationSettings =
+								'duration': opts.duration
+								'easing': opts.easing
+								'complete': ->
+									animationRunning = no
+									opts.onAnimationComplete index, $li.eq index
+							layerAnimationSettings =
+								'duration': opts.duration
+								'easing': opts.easing
+							
+							$ul.stop().delay(opts.delay).animate animationProperties, animationSettings
+							
+							$li.each (i) ->
+								if i is index
+									animationProperties =
+										'opacity': 1
+									direction = if $self.data('carousel').currentItem < index then 1 else -1
+									$(@).find('.carousel-layer').each ->
+										$layer = $ @
+										$layer.css('left': "#{direction * $layer.data('speed') * 100}%", 'opacity': 0).stop().delay($layer.data 'delay').animate ('left': 0, 'opacity': 1), layerAnimationSettings
+										
+								else
+									animationProperties =
+										'opacity': 0
+								$(@).stop().delay(opts.delay).animate animationProperties, layerAnimationSettings
+														
+							if index is itemCount - 1 then $nextArrow.addClass 'disabled' else $nextArrow.removeClass 'disabled'
+							if index is 0 then $previousArrow.addClass 'disabled' else $previousArrow.removeClass 'disabled'
+							
+							$controls.removeClass('active').eq(index).addClass 'active'
+
+							$self.data('carousel').currentItem = index
+							yes
+
+						'requestItem': (index) ->
+							return no if index < 0 or index >= itemCount or index is $self.data('carousel').currentItem or animationRunning
+
+							if opts.ajax
+								$requestedLi = $li.eq index
+								$request = $requestedLi.attr('data-request')
+								
+								opts.onAjaxInit index, $request
+
+								$.ajax $request,
+									success: (data) ->
+										$data = $ data
+										$img = $data.find 'img'
+										imgCount = $img.length
+										imgLoaded = 0
+										
+										if imgCount > 0
+											$img.each ->
+												$curImg = $ @
+												src = $curImg.attr 'src'
+												$curImg.load( ->
+													if ++imgLoaded >= imgCount
+														$requestedLi.html $ data
+														$requestedLi.find('.carousel-layer').each ->
+															$layer = $ @ 
+															$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
+															$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
+														
+														opts.onAjaxComplete index, data
+														$self.data('carousel').showItem index
+												).error( (msg) ->
+													opts.onAjaxError index, msg
+												).attr('src', src)
+										else
+											$requestedLi.html $ data
+											$requestedLi.find('.carousel-layer').each ->
+												$layer = $ @ 
+												$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
+												$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed		
+											opts.onAjaxComplete index, data
+											$self.data('carousel').showItem index
+										
+									error: (msg) ->
+										opts.onAjaxError index, msg
+							else
+								$self.data('carousel').showItem index
+
+
+					# Binding events
+					$nextArrow.click ->
+						$self.data('carousel').requestItem $self.data('carousel').currentItem + 1
+						no
+					$previousArrow.click ->
+						$self.data('carousel').requestItem $self.data('carousel').currentItem - 1
+						no
+
+					$controls.click ->
+						$self.data('carousel').requestItem $.inArray @, $controls
+						no
+					
+					$(window).bind 'resize', ->
+						$self.data('carousel').stop()
+						init()
 							
 )(jQuery)
