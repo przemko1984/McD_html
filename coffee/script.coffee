@@ -1,8 +1,9 @@
 (($) ->
 
 	$(document).ready ->
-		$('.carousel-container').carousel('ajax': true)
+		$('.carousel-container').carousel 'ajax': true
 		$('.tiled-submenu').carousel()
+		$('.timeline-carousel-container').carousel 'vertical': true
 
 		$nutritionFactsButton = $ '.nutrition-facts-button'
 		$nutritionFacts = $ '.nutrition-facts'

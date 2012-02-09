@@ -18,6 +18,7 @@
 	onAjaxError - function to be called in case of failure of the request. takes 2 params - index of element to be showed, and the error message
 	onAjaxComplete - function to be called after successful ajax request was made. takes 2 params - index of element to be showed, and the return data
 	ajax - flag indicating if content of li tags in the carousel should be dynamically loaded. requires data-request attribute on all li elements.
+	vertical - determines direction of scrolling
 	###
 	$.extend $.fn,
 		
@@ -32,7 +33,8 @@
 				'onAjaxInit': $.noop
 				'onAjaxError': $.noop
 				'onAjaxComplete': $.noop
-				'ajax': false
+				'ajax': false,
+				'vertical': false
 			opts = $.extend defaults, options
 			@each ->
 				$self = $ @
@@ -43,7 +45,9 @@
 				$previousArrow = $self.find '.previous-arrow'
 				$controls = $self.find '.carousel-controls li'
 				$controlsParentWidth = $controls.parent().width()
+				$controlsParentHeight = $controls.parent().height()
 				itemWidth = $li.width()
+				itemHeight = $li.height()
 				itemCount = $li.length
 				controlsCount = $controls.length
 				animationRunning = no
@@ -52,14 +56,19 @@
 					# Initialization
 					init = ->
 						itemWidth = $li.width()
+						itemHeight = $li.height()
 						
 						$self.data('carousel').currentItem = 0 if $self.data('carousel')?
 						
 						$ul.css
-							'width': "#{itemWidth * itemCount}px",
 							'position': 'absolute',
 							'left': 0,
 							'top': 0
+						
+						if opts.vertical
+							$ul.css	'height': "#{itemHeight * itemCount}px"
+						else
+							$ul.css	'width': "#{itemWidth * itemCount}px"
 
 						if not $self.find('.list-wrapper').length
 							$ul.wrap $ '<div />',
@@ -106,8 +115,12 @@
 
 							opts.onAnimationInit index, $li.eq index
 
-							animationProperties =
-								'left': "#{-index * itemWidth}px"
+							if opts.vertical
+								animationProperties =
+									'top': "#{-index * itemHeight}px"
+							else
+								animationProperties =
+									'left': "#{-index * itemWidth}px"
 							animationSettings =
 								'duration': opts.duration
 								'easing': opts.easing
@@ -127,7 +140,10 @@
 									direction = if $self.data('carousel').currentItem < index then 1 else -1
 									$(@).find('.carousel-layer').each ->
 										$layer = $ @
-										$layer.css('left': "#{direction * $layer.data('speed') * 100}%", 'opacity': 0).stop().delay($layer.data 'delay').animate ('left': 0, 'opacity': 1), layerAnimationSettings
+										if opts.vertical
+											$layer.css('top': "#{direction * $layer.data('speed') * 100}%", 'opacity': 0).stop().delay($layer.data 'delay').animate ('top': 0, 'opacity': 1), layerAnimationSettings
+										else
+											$layer.css('left': "#{direction * $layer.data('speed') * 100}%", 'opacity': 0).stop().delay($layer.data 'delay').animate ('left': 0, 'opacity': 1), layerAnimationSettings
 										
 								else
 									animationProperties =

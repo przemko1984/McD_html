@@ -19,6 +19,7 @@
   	onAjaxError - function to be called in case of failure of the request. takes 2 params - index of element to be showed, and the error message
   	onAjaxComplete - function to be called after successful ajax request was made. takes 2 params - index of element to be showed, and the return data
   	ajax - flag indicating if content of li tags in the carousel should be dynamically loaded. requires data-request attribute on all li elements.
+  	vertical - determines direction of scrolling
   */
   return $.extend($.fn, {
     carousel: function(options) {
@@ -33,11 +34,12 @@
         'onAjaxInit': $.noop,
         'onAjaxError': $.noop,
         'onAjaxComplete': $.noop,
-        'ajax': false
+        'ajax': false,
+        'vertical': false
       };
       opts = $.extend(defaults, options);
       return this.each(function() {
-        var $controls, $controlsParentWidth, $layers, $li, $nextArrow, $previousArrow, $self, $ul, animationRunning, controlsCount, init, itemCount, itemWidth;
+        var $controls, $controlsParentHeight, $controlsParentWidth, $layers, $li, $nextArrow, $previousArrow, $self, $ul, animationRunning, controlsCount, init, itemCount, itemHeight, itemWidth;
         $self = $(this);
         $ul = $self.find(':not(.carousel-controls)').children('ul');
         $li = $ul.find('li');
@@ -46,23 +48,33 @@
         $previousArrow = $self.find('.previous-arrow');
         $controls = $self.find('.carousel-controls li');
         $controlsParentWidth = $controls.parent().width();
+        $controlsParentHeight = $controls.parent().height();
         itemWidth = $li.width();
+        itemHeight = $li.height();
         itemCount = $li.length;
         controlsCount = $controls.length;
         animationRunning = false;
-        
         if (itemCount > 1) {
           init = function() {
             itemWidth = $li.width();
+            itemHeight = $li.height();
             if ($self.data('carousel') != null) {
               $self.data('carousel').currentItem = 0;
             }
             $ul.css({
-              'width': "" + (itemWidth * itemCount) + "px",
               'position': 'absolute',
               'left': 0,
               'top': 0
             });
+            if (opts.vertical) {
+              $ul.css({
+                'height': "" + (itemHeight * itemCount) + "px"
+              });
+            } else {
+              $ul.css({
+                'width': "" + (itemWidth * itemCount) + "px"
+              });
+            }
             if (!$self.find('.list-wrapper').length) {
               $ul.wrap($('<div />', {
                 'class': 'list-wrapper'
@@ -116,9 +128,15 @@
               }
               animationRunning = true;
               opts.onAnimationInit(index, $li.eq(index));
-              animationProperties = {
-                'left': "" + (-index * itemWidth) + "px"
-              };
+              if (opts.vertical) {
+                animationProperties = {
+                  'top': "" + (-index * itemHeight) + "px"
+                };
+              } else {
+                animationProperties = {
+                  'left': "" + (-index * itemWidth) + "px"
+                };
+              }
               animationSettings = {
                 'duration': opts.duration,
                 'easing': opts.easing,
@@ -142,13 +160,23 @@
                   $(this).find('.carousel-layer').each(function() {
                     var $layer;
                     $layer = $(this);
-                    return $layer.css({
-                      'left': "" + (direction * $layer.data('speed') * 100) + "%",
-                      'opacity': 0
-                    }).stop().delay($layer.data('delay')).animate({
-                      'left': 0,
-                      'opacity': 1
-                    }, layerAnimationSettings);
+                    if (opts.vertical) {
+                      return $layer.css({
+                        'top': "" + (direction * $layer.data('speed') * 100) + "%",
+                        'opacity': 0
+                      }).stop().delay($layer.data('delay')).animate({
+                        'top': 0,
+                        'opacity': 1
+                      }, layerAnimationSettings);
+                    } else {
+                      return $layer.css({
+                        'left': "" + (direction * $layer.data('speed') * 100) + "%",
+                        'opacity': 0
+                      }).stop().delay($layer.data('delay')).animate({
+                        'left': 0,
+                        'opacity': 1
+                      }, layerAnimationSettings);
+                    }
                   });
                 } else {
                   animationProperties = {
