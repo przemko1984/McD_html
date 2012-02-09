@@ -279,7 +279,6 @@ header {
 
   -webkit-box-shadow: -1px 1px 6px rgba(0, 0, 0, 0.55);
   -moz-box-shadow:    -1px 1px 6px rgba(0, 0, 0, 0.55);
-  -o-box-shadow:      -1px 1px 6px rgba(0, 0, 0, 0.55);
   box-shadow:         -1px 1px 6px rgba(0, 0, 0, 0.55);
 }
   
@@ -769,7 +768,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
 	}
 
   #main-content {
-    margin: 40px auto 0;
+    margin: 39px auto 0;
     width: 960px;
     position: relative;
   }
@@ -1183,184 +1182,8 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
 		background-repeat: no-repeat;
 		margin: 40px 0;
 	}
-
-/**
- * Timeline styles
-**/
-
-.timeline-container {
-  padding: 0 40px;
-  position: relative;
-  width: 880px;
-}
-
-  .timeline-carousel-container {
-    position: relative;
-  }
-
-  .timeline-carousel-arrow {
-    background-image: url(../img/top-container-arrows.png);
-    background-repeat: no-repeat;
-    height: 25px;
-    left: 50px;
-    margin: 0 0 0 -13px;
-    position: absolute;
-    text-indent: -9999px;
-    width: 26px;
-  }
-
-  .timeline-carousel-arrow.next-arrow {
-    background-position: 0 -25px;
-    top: 235px;
-  }
-
-  .timeline-carousel-arrow.previous-arrow {
-    background-position: 0 0;
-    top: 0;
-  }
-
-  .timeline-carousel {
-    height: 260px;
-    margin: 40px 0;
-    overflow: hidden;
-    position: relative;
-  }
-    
-    .timeline-carousel ul {
-      list-style: none;
-      margin: 0;
-      overflow: hidden;
-      padding: 0;
-      width: 100%;
-    }
-
-      .timeline-carousel li {
-        display: block;
-        height: 260px;
-        position: relative;
-        width: 100%;
-      }
-
-  .timeline-container .date {
-    color: #a0a0a1;
-    display: block;
-    float: left;
-    /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-    font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
-    font-size: 5.34em;
-    height: 260px;
-    line-height: 3.85em;
-    padding: 0 40px 0 0;
-    width: 100px;
-  }
-
-  .timeline-container h5 {
-    margin: 0 0 0 140px;
-    width: 380px;
-  }
-
-  .timeline-container p {
-    margin: 100px 0 0 140px;
-    width: 380px;
-  }
-
-  .timeline-image {
-    height: 205px;
-    margin: 15px 0 0 570px;
-    padding: 15px;
-    width: 260px;
-
-    -webkit-box-shadow: -1px 1px 8px rgba(0, 0, 0, 0.22);
-    -moz-box-shadow:    -1px 1px 8px rgba(0, 0, 0, 0.22);
-    -o-box-shadow:      -1px 1px 8px rgba(0, 0, 0, 0.22);
-    box-shadow:         -1px 1px 8px rgba(0, 0, 0, 0.22);
-
-    -webkit-transition: -webkit-transform .3s ease-out;
-    -moz-transition: -moz-transform .3s ease-out;
-    -o-transition: -o-transform .3s ease-out;
-    -ms-transition: -ms-transform .3s ease-out;
-    transition: transform .3s ease-out;
-  }
-
-  .ie8 .timeline-image {
-    border: 1px solid #ebebeb;
-  }
-
-  .no-touch .timeline-image:hover {
-    -webkit-transform: rotate(-3deg);
-    -moz-transform: rotate(-3deg);
-    -o-transform: rotate(-3deg);
-    -ms-transform: rotate(-3deg);
-    transform: rotate(-3deg);
-  }
-
-    .timeline-image img {
-      height: 100%;
-      width: 100%;
-    }
-
-  .decades {
-    border-top: 1px solid #eaebeb;
-    padding: 40px 0;
-  }
-    
-    .decades .label {
-      color: #a0a0a1;
-      float: left;
-      /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-      font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
-      font-size: 1.85em;
-      height: 58px;
-      line-height: 2.6em;
-      margin: 0 12px;
-      text-transform: uppercase;
-      width: 58px;
-    }
-  
-    .decades ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-
-      .decades li {
-        display: block;
-        float: left;
-        margin: 0 28px;
-      }
-
-        a.timeline-button {
-          background-color: #f4f4f4;
-          color: #8c8c8c;
-          display: block;
-          font-size: 1.38em;
-          height: 24px;
-          padding: 17px 0;
-          text-align: center;
-          text-decoration: none;
-          width: 58px;
-          
-          -webkit-border-radius:  50%;
-          -moz-border-radius:     50%;
-          -o-border-radius:       50%;
-          border-radius:          50%; 
-        }
-
-        .ie8 a.timeline-button {
-          background-color: transparent;
-          background-image: url(../img/timeline-button.png);
-          background-repeat: no-repeat;
-        }
-
-        .no-touch a.timeline-button:hover, a.timeline-button.active {
-          background-color: #d23f38;
-          color: #fff;
-        }
-        
-        .ie8 a.timeline-button:hover, .ie8 a.timeline-button.active {
-          background-position: 0 -60px;
-        }
-
+	
+	
 /**
  * Footer styles
 **/
