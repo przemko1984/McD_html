@@ -3,6 +3,7 @@
 	$(document).ready ->
 		$('.carousel-container').carousel 'ajax': true
 		$('.tiled-submenu').carousel()
+		$('.timeline-carousel-container').carousel 'vertical': true
 
 		$('.timeline-carousel-container').carousel
 			'vertical': true
