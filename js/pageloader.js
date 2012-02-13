@@ -57,12 +57,13 @@ function pageload(hash) {
 							$('.main-container-rm').animate({top: '-800px' }, 500, function() {
 								$('.main-container-rm').remove();
 								$('#main-container').animate({	    
-										height: height_c_new+"px", 
+										height: height_c_new+"px"										
 								  }, 500, function() { 
 									  $('#main-container').addClass('overflow-hidden main-container-full');
-									  $('.main-container-new').css('display','block');
+									  $('.main-container-new').css('display','block').css('opacity','0');
 									  $('.main-container-new').animate({	    
 											top: '0',							
+											opacity: '1'
 										  }, 400, function() {
 											  $('.main-container-new').addClass('main-container').removeClass('main-container-new');
 											  $('#main-container').removeClass('overflow-hidden');
@@ -77,16 +78,20 @@ function pageload(hash) {
 						  $('#main-container').has('.main-container').css('height',height_c+'px');
 						  $('.main-container-full .main-container').addClass('main-container-rm').removeClass('main-container');
 						  $('#main-container').addClass('overflow-hidden');
-							$('.main-container-rm').animate({top: (height_c_new+100)+'px' }, 500, function() {
+							$('.main-container-rm').animate({
+									top: (height_c_new+100)+'px',
+									opacity: '0'
+								}, 500, function() {
 								$('.main-container-rm').remove();
 								$('#main-container').removeClass('overflow-hidden');
 								$('#main-container').animate({	    
 										height: height_c_new+"px", 
 								  }, 500, function() { 
 									  
-									  $('.main-container-new').css('display','block');
+									  $('.main-container-new').css('display','block').css('opacity','0');
 									  $('.main-container-new').animate({	    
 											top: '0',							
+											opacity: '1'
 										  }, 600, function() {
 											  $('.main-container-new').addClass('main-container').removeClass('main-container-new');
 											  $('#main-container').css('height','auto');
@@ -100,14 +105,15 @@ function pageload(hash) {
 							height: height_c_new+"px", 
 						  }, 500, function() { 
 							  $('#main-container').addClass('overflow-hidden');	
-							  $('.main-container-new').css('display','block');
+							  $('.main-container-new').css('display','block').css('opacity','0');
 							  $('.main-container-new').animate({	    
 									top: '0',							
+									opacity: '1'
 								  }, 700, function() {
 									  $('.main-container-new').addClass('main-container').removeClass('main-container-new');
 									  $('#main-container').removeClass('overflow-hidden');
 									  $('#main-container').css('height','auto');
-//									  console.log("#1 ŁADOWANIE");
+									  console.log("#1 ŁADOWANIE");
 								}); 
 						});
 				  },
@@ -133,8 +139,9 @@ function setDefault() {
 		$('#main-container').removeClass('overflow-hidden');
 		$('#main-container').animate({	    
 			height: "220px", 
+			opacity: '0'
 		  }, 400, function() {
-			  $('#main-container').removeClass('main-container-full').css('height','0');
+			  $('#main-container').removeClass('main-container-full').css('height','0').css('opacity','1');
 		});
 	});
 }
