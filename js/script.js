@@ -8,7 +8,16 @@
     });
     $('.tiled-submenu').carousel();
     $('.timeline-carousel-container').carousel({
-      'vertical': true
+      'vertical': true,
+      'onAnimationComplete': function(index, $li) {
+        $('.decades li a').removeClass('active');
+        return $('.decades li[data-decade="' + $li.attr('data-decade') + '"]').find('a').addClass('active');
+      }
+    });
+    $('.decades li[data-decade="' + $('.timeline-carousel li').eq(0).attr('data-decade') + '"]').find('a').addClass('active');
+    $('.decades li a').click(function() {
+      $(this).parents('.timeline-container').find('.timeline-carousel-container').data('carousel').requestItem($.inArray($(this).parents('.timeline-container').find('.timeline-carousel li[data-decade="' + $(this).parent().attr('data-decade') + '"]')[0], $(this).parents('.timeline-container').find('.timeline-carousel li')));
+      return false;
     });
     $nutritionFactsButton = $('.nutrition-facts-button');
     $nutritionFacts = $('.nutrition-facts');
