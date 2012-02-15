@@ -40,9 +40,13 @@
 	text-decoration: none;
 }
 
-#about-us-tabs li{
+.tabsCol2 li{
+	width: 480px;
+}
+.tabsCol4 li{
 	width: 230px;
 }
+
 #about-us-tabs li:first-child{
 	width: 270px;
 }

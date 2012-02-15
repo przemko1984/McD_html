@@ -1327,6 +1327,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
         display: block;
         float: left;
         margin: 0 28px;
+        width: auto;
       }
 
         a.timeline-button {
