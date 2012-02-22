@@ -42,6 +42,10 @@ $(document).ready(function() {
 	);
 	
 	 $(".tabs").tabs();
+	 
+	 
+	 $( "#cafe-accordion" ).accordion({ active: -1,autoHeight: false});
+		
 });
 
 /*

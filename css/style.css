@@ -1494,3 +1494,103 @@ footer {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3 { page-break-after: avoid; }
 }
+
+
+
+/* 
+	autor: PO
+	dodane: 21.02.2012 
+*/
+.nocaruselhead #top-content{
+  	height: 540px;
+  }
+
+.nocaruselhead .top-container{
+	position: relative;
+}
+.nocaruselhead  #top-content h2{
+	margin: 50px 0 10px;
+	
+}
+.nocaruselhead  #top-content p{
+	margin: 0;
+	width: 250px;
+}
+.ui-accordion{
+	margin: 0 0 30px;
+}
+.ui-accordion h3{
+	margin: 10px 0 0 0;
+	padding: 2px 0 0 125px;
+	color: #ffffff;
+	background-color: #2f2f2f;
+	line-height: 1.3em;	
+	font-size: 4.6em;
+	position: relative;
+	background-repeat: no-repeat;
+	background-position: 38px center;
+}
+.ui-accordion h3 a{
+	color: #ffffff;
+	text-decoration: none;
+}
+.ui-accordion h3 a:hover{
+	color: #ffffff;
+}
+.ui-accordion .ui-icon {
+	width: 27px;
+	height: 15px;
+	position: absolute;
+	right: 37px;
+	top: 0;
+	height: 100%;
+}
+.ui-accordion .ui-icon-triangle-1-e {
+	background: transparent url(../img/McCaffe/arrow_up.png) no-repeat center left;
+}
+.ui-accordion .ui-icon-triangle-1-s {
+	background: transparent url(../img/McCaffe/arrow_down.png) no-repeat center left;
+}
+.ui-accordion h3.kawa{
+	background-image: url(../img/McCaffe/kawy.png);
+}
+.ui-accordion h3.cieple_napoje{
+	background-image: url(../img/McCaffe/cieple_napoje.png);
+}
+.ui-accordion h3.zimne_napoje{
+	background-image: url(../img/McCaffe/zimne_napoje.png);
+}
+.ui-accordion h3.frappe{
+	background-image: url(../img/McCaffe/frappe.png);
+}
+.ui-accordion h3.desery{
+	background-image: url(../img/McCaffe/desery.png);
+}
+.ui-accordion h3.ciastka{
+	background-image: url(../img/McCaffe/ciastka.png);
+}
+.ui-accordion .ui-accordion-content{
+	padding: 10px 37px 10px 125px;
+}
+.ui-accordion table{
+	corlo: #a9a9a9;
+	width: 100%;	
+	font-family: "AkzidenzGroteskCondensed",'Arial Narrow',Arial,Helvetica,sans-serif;
+	font-size: 1.87em;	
+	font-size-adjust: 0.488;
+    font-style: normal;
+    font-weight: 100;
+}
+.ui-accordion table th {
+	text-transform: uppercase;
+	width: 240px;
+	text-align: left;
+	line-height: 1.3em;
+	font-weight: normal;	
+}
+.ui-accordion table td {
+	text-align: right;
+}
+.ui-accordion table td.td_2 {
+	width: 100px;
+}
