@@ -1594,3 +1594,99 @@ footer {
 .ui-accordion table td.td_2 {
 	width: 100px;
 }
+
+.news {
+	margin: 0 0 40px;
+}
+.news .news-img {
+	float: left;
+	width: 240px;
+	margin: 0 40px 0 0;
+	padding: 6px 0;	
+}
+.news .news-content {
+	float: left;
+	width: 600px;
+	font-style: italic;		
+}
+.news .date {
+	margin: 0;
+	color: #9a130c;
+}
+.news .title {
+	margin: 15px 0 12px;
+	font-size: 1.4em;
+	width: 410px;
+}
+.news p {
+	margin: 4px 0;
+	margin: 0;
+}
+.news .news-content a{
+	text-decoration: none;
+}
+.news .news-content p.more {
+	margin: 10px 0 0;
+	line-height: 1.4em;
+}
+.news .news-content .more a{
+	color: inherit;
+	padding: 0 20px 0 0;
+	background: transparent url(../img/more_arrow.png) no-repeat center right;
+}
+
+.paggination {
+	text-align: center;
+	margin: 10px auto;
+	width: 150px;
+}
+
+.paggination a{
+	background: transparent url(../img/item_grey.png) no-repeat center right;
+	width: 18px;
+	height: 18px;
+	padding: 10px 9px;
+	float: left;
+}
+.paggination a:hover, .paggination a.active{
+	background: transparent url(../img/item_red.png) no-repeat center right;		
+}
+.news-detail {
+	position: relative;
+	padding: 0 0 40px 0;
+}
+.news-detail .box-top-right{
+	position: absolute;
+	top: 0;
+	right: 0;	
+}
+.news-detail .box-bottom-right{
+	position: absolute;
+	bottom: 0;
+	right: 0;	
+}
+.news-detail .box-top-right img{
+	padding: 0 0 0 20px;
+}
+.news-detail .title {
+	width: auto;
+	fotn-sieze: 1.6em;
+	font-style: italic;		
+}
+.news-detail .lead {
+	margin: 0 0 70px 0;
+	fotn-sieze: 1.2em;
+	font-style: italic;		
+}
+.news-detail p{
+	margin: 15px 0;
+	text-align: justify;
+	font-style: normal;
+}
+
+.news-detail .news-img, .news-detail .news-content{
+	margin-top: 20px;
+}
+.news-detail .news-img {
+    padding: 20px 0;
+}    
