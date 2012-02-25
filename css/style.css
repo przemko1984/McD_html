@@ -1581,13 +1581,23 @@ footer {
     font-style: normal;
     font-weight: 100;
 }
-.ui-accordion table th {
+/* 
+	autor: PO
+	dodane: 25.02.2012
+	
+	zmiana start 
+*/
+.ui-accordion table td.td_1 { 
 	text-transform: uppercase;
 	width: 240px;
 	text-align: left;
 	line-height: 1.3em;
 	font-weight: normal;	
 }
+/* 
+	zmiana end
+*/
+
 .ui-accordion table td {
 	text-align: right;
 }
@@ -1689,4 +1699,6 @@ footer {
 }
 .news-detail .news-img {
     padding: 20px 0;
-}    
+}
+
+

@@ -43,6 +43,14 @@ $(document).ready(function() {
 	
 	 $(".tabs").tabs();
 	 
+	 $("#cafe-accordion table tr td:first-child").each(function() {
+		 $(this).addClass("td_1");
+	 });
+	 $("#cafe-accordion table tr td.td_1 + td").each(function() {
+		 $(this).addClass("td_2");
+	 });
+
+	 
 	 $( "#cafe-accordion" ).accordion({ active: -1, autoHeight: false});
 	 
 });
