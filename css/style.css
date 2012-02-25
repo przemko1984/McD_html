@@ -213,11 +213,14 @@ td { vertical-align: top; }
 
 @font-face { font-family: AkzidenzGroteskCondensed; src: url('../font/font-condensed.otf'); }
 @font-face { font-family: AkzidenzGrotesk; src: url('../font/font.otf'); }
-@font-face { font-family: AkzidenzGroteskMediumCondensed; src: url('../font/font-medium-condensed.otf'); } 
+@font-face { font-family: AkzidenzGroteskMediumCondensed; src: url('../font/font-medium-condensed.otf'); }
+@font-face { font-family: "Open Sans Condensed";  font-style: normal;   font-weight: 300;  src: local("Open Sans Cond Light"), local("OpenSans-CondensedLight"), url("http://themes.googleusercontent.com/static/fonts/opensanscondensed/v6/gk5FxslNkTTHtojXrkp-xICtgNwyJYHzDAjKtI5LRRA.woff") format("woff");
+}
+
 
 h1, h2, h3, h4, h5 {
   /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-  font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+  font-family: "Open Sans Condensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
   text-transform: uppercase;
 }
 
@@ -231,7 +234,7 @@ h2 {
 
 
 h3 {
-  font-size: 2.78em;
+  font-size: 2.69em;
 }
 
 h4 {
@@ -266,6 +269,8 @@ body {
 }
 
 
+
+
 /**
  * Header styles
 **/
@@ -273,7 +278,9 @@ body {
 header {
   background-color: #000;
   /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-  font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+  
+  
+  font-family: "Open Sans Condensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
   position: relative;
   z-index: 100;
 
@@ -323,6 +330,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
       float: left;
       height: 66px;
       width: 61px;
+      position:absolute;
     }
 
     #main-menu ul {
@@ -369,7 +377,6 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
 
         .tiled-submenu {
           background-color: #fff;
-          height: 540px;
           left: 0;
           top: 100%;
           width: 100%;
@@ -377,6 +384,8 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
           -webkit-box-shadow: -1px 1px 8px rgba(0, 0, 0, 0.15);
           -moz-box-shadow:    -1px 1px 8px rgba(0, 0, 0, 0.15);
           box-shadow:         -1px 1px 8px rgba(0, 0, 0, 0.15);
+          /*height: 540px;*/
+          height: 630px;
         }
 
           #main-menu .tiled-submenu ul, #main-menu .tiled-submenu li {
@@ -424,30 +433,42 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
             .tiles-container.five-in-row .tile {
               padding: 17px 16px 0;
               width: 160px;
+              /* 25.02.2012*/
+              height: 170px;
+              position: relative;
             }
 
             .tiles-container.six-in-row .tile {
               padding: 17px 10px 0;
               width: 140px;
+			  /* 25.02.2012 */
+			  height: 155px; 
+			  position: relative;
             }
 
             .tiles-container.irregular .tile {
-              padding: 17px 16px 0;
+              padding: 17px 16px 0;              
             }
 
             .tiles-container.irregular .big-tile {
               width: 544px;
               height: 459px;
+              /* 25.02.2012*/
+              position: relative;              
             }
 
             .tiles-container.irregular .medium-tile {
               width: 352px;
               height: 201px;
+              /* 25.02.2012*/
+              position: relative;
             }
 
             .tiles-container.irregular .small-tile {
               width: 160px;
               height: 240px;
+              /* 25.02.2012*/
+              position: relative;
             }
 
               .tiled-submenu a .tile figcaption {
@@ -455,7 +476,28 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
                 font-size: 1.3em;
                 margin: .2em 0 0 0;
                 text-align: center;
+                 /* 25.02.2012*/
+                position: absolute;
+                bottom: 0;
               }
+              
+              /* 25.02.2012*/
+              .tiled-submenu .five-in-row a .tile figcaption {
+              	width: 160px;
+              }
+              .tiled-submenu .six-in-row a .tile figcaption {
+              	width: 140px;
+              }
+              .tiled-submenu .irregular a .big-tile figcaption {
+              	width: 544px;
+              }
+              .tiled-submenu .irregular a .medium-tile figcaption {
+              	width: 352px;
+              }
+              .tiled-submenu .irregular a .small-tile figcaption {
+              	width: 160px;
+              }
+              
 
 /**
  * Main styles
@@ -667,6 +709,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
 	}
 	.top-container-nav .top-container-col h3{
 		margin:0;
+		font-size: 2.49em;
 	}
 	#top-content .top-container-nav .top-container-col p {
 		margin: 40px 0 0 0;
@@ -932,7 +975,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
           display: block;
           float: left;
           /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-          font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+          font-family: "Open Sans Condensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
           padding: 10px;
           text-transform: uppercase;
           width: 300px;
@@ -1246,7 +1289,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
     display: block;
     float: left;
     /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-    font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+    font-family: "Open Sans Condensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
     font-size: 5.34em;
     height: 260px;
     line-height: 3.85em;
@@ -1308,7 +1351,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
       color: #a0a0a1;
       float: left;
       /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-      font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+      font-family: "Open Sans Condensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
       font-size: 1.85em;
       height: 58px;
       line-height: 2.6em;
@@ -1410,7 +1453,7 @@ footer {
 
         .footer-box li {
           /*font-family: "ProximaNovaExtraCondensedThin", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;*/
-          font-family: "AkzidenzGroteskCondensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+          font-family: "Open Sans Condensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
           text-transform: uppercase;  
         }
 
@@ -1575,7 +1618,7 @@ footer {
 .ui-accordion table{
 	corlo: #a9a9a9;
 	width: 100%;	
-	font-family: "AkzidenzGroteskCondensed",'Arial Narrow',Arial,Helvetica,sans-serif;
+	font-family: "Open Sans Condensed",'Arial Narrow',Arial,Helvetica,sans-serif;
 	font-size: 1.87em;	
 	font-size-adjust: 0.488;
     font-style: normal;
