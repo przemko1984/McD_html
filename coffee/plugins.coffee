@@ -28,13 +28,14 @@
 				'easing': 'swing'
 				'speed': 0
 				'delay': 0
+				'variableDimensions': no
 				'onAnimationComplete': $.noop
 				'onAnimationInit': $.noop
 				'onAjaxInit': $.noop
 				'onAjaxError': $.noop
 				'onAjaxComplete': $.noop
-				'ajax': false,
-				'vertical': false
+				'ajax': no
+				'vertical': no
 			opts = $.extend defaults, options
 			@each ->
 				$self = $ @
@@ -51,13 +52,11 @@
 				itemCount = $li.length
 				controlsCount = $controls.length
 				animationRunning = no
+				$listWrapper = $self.find '.list-wrapper'
 				
 				if itemCount > 1
 					# Initialization
-					init = ->
-						itemWidth = $li.width()
-						itemHeight = $li.height()
-						
+					init = ->						
 						$self.data('carousel').currentItem = 0 if $self.data('carousel')?
 						
 						$ul.css
@@ -65,18 +64,28 @@
 							'left': 0,
 							'top': 0
 						
-						if opts.vertical
-							$ul.css	'height': "#{itemHeight * itemCount}px"
-						else
-							$ul.css	'width': "#{itemWidth * itemCount}px"
-
-						if not $self.find('.list-wrapper').length
+						if not $listWrapper.length
 							$ul.wrap $ '<div />',
 								'class': 'list-wrapper'
+							$listWrapper = $self.find '.list-wrapper'
 
 						$li.css('opacity': 1).filter(':not(:first)').css
 							'opacity': 0
+					
+						if opts.variableDimensions
+							$li.each ->
+								$liItem = $ @
+								if opts.vertical then $liItem.css 'height': "#{getChildrenHeight $liItem}px" else $liItem.css 'width': "#{getChildrenWidth $liItem}px"
 
+						itemWidth = $li.eq(0).width()
+						itemHeight = $li.eq(0).height()
+
+						if opts.vertical
+							$ul.css	'height': "#{if opts.variableDimensions then getPreviousHeight itemCount else itemCount * itemHeight}px"
+							$listWrapper.css 'height': "#{itemHeight}px"
+						else
+							$ul.css	'width': "#{if opts.variableDimensions then getPreviousWidth itemCount else itemCount * itemWidth}px"
+							$listWrapper.css 'width': "#{itemWidth}px"
 
 						$previousArrow.addClass 'disabled'
 						$nextArrow.removeClass('disabled')
@@ -94,6 +103,32 @@
 							horizontalMargin = parseInt $control.css('margin-left')
 							horizontalMargin += parseInt $control.css('margin-right')
 							$control.css 'width': "#{($controlsParentWidth/controlsCount) - horizontalMargin}px"
+					
+					getPreviousHeight = (index) ->
+						dim = 0
+						for item in $li.slice 0, index
+							dim += $(item).height()
+						dim
+
+					getPreviousWidth = (index) ->
+						dim = 0
+						for item in $li.slice 0, index
+							dim += $(item).width()
+						dim
+
+					getChildrenHeight = (item) ->
+						height = 0
+						for child in item.children()
+							ch = $(child).outerHeight yes
+							height = ch if ch > height
+						height
+
+					getChildrenWidth = (item) ->
+						width = 0
+						for child in item.children()
+							cw = $(child).outerWidth yes
+							width = cw if cw > width
+						width
 						
 					init()
 
@@ -115,12 +150,6 @@
 
 							opts.onAnimationInit index, $li.eq index
 
-							if opts.vertical
-								animationProperties =
-									'top': "#{-index * itemHeight}px"
-							else
-								animationProperties =
-									'left': "#{-index * itemWidth}px"
 							animationSettings =
 								'duration': opts.duration
 								'easing': opts.easing
@@ -130,6 +159,21 @@
 							layerAnimationSettings =
 								'duration': opts.duration
 								'easing': opts.easing
+
+							if opts.vertical
+								animationProperties =
+									'top': "#{if opts.variableDimensions then -getPreviousHeight index else -index * itemHeight}px"
+								if opts.variableDimensions
+									wrapperAnimationProperties = 
+										'height' : "#{$li.eq(index).height()}px"
+									$listWrapper.animate wrapperAnimationProperties, animationSettings
+							else
+								animationProperties =
+									'left': "#{if opts.variableDimensions then -getPreviousWidth index else -index * itemWidth}px"
+								if opts.variableDimensions
+									wrapperAnimationProperties = 
+										'width' : "#{$li.eq(index).width()}px"
+									$listWrapper.animate wrapperAnimationProperties, animationSettings
 							
 							$ul.stop().delay(opts.delay).animate animationProperties, animationSettings
 							
@@ -187,6 +231,8 @@
 															$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed
 														
 														opts.onAjaxComplete index, data
+														if opts.variableDimensions
+															if opts.vertical then $requestedLi.css 'height': "#{getChildrenHeight $requestedLi}px" else $requestedLi.css 'width': "#{getChildrenWidth $requestedLi}px"
 														$self.data('carousel').showItem index
 												).error( (msg) ->
 													opts.onAjaxError index, msg
@@ -198,6 +244,8 @@
 												$layer.data 'delay', if $layer.attr 'data-delay' then parseInt $layer.attr 'data-delay' else opts.delay
 												$layer.data 'speed', if $layer.attr 'data-speed' then parseInt $layer.attr 'data-speed' else opts.speed		
 											opts.onAjaxComplete index, data
+											if opts.variableDimensions
+												if opts.vertical then $requestedLi.css 'height': "#{getChildrenHeight $requestedLi}px" else $requestedLi.css 'width': "#{getChildrenWidth $requestedLi}px"
 											$self.data('carousel').showItem index
 										
 									error: (msg) ->

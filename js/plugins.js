@@ -29,6 +29,7 @@
         'easing': 'swing',
         'speed': 0,
         'delay': 0,
+        'variableDimensions': false,
         'onAnimationComplete': $.noop,
         'onAnimationInit': $.noop,
         'onAjaxInit': $.noop,
@@ -39,7 +40,7 @@
       };
       opts = $.extend(defaults, options);
       return this.each(function() {
-        var $controls, $controlsParentHeight, $controlsParentWidth, $layers, $li, $nextArrow, $previousArrow, $self, $ul, animationRunning, controlsCount, init, itemCount, itemHeight, itemWidth;
+        var $controls, $controlsParentHeight, $controlsParentWidth, $layers, $li, $listWrapper, $nextArrow, $previousArrow, $self, $ul, animationRunning, controlsCount, getChildrenHeight, getChildrenWidth, getPreviousHeight, getPreviousWidth, init, itemCount, itemHeight, itemWidth;
         $self = $(this);
         $ul = $self.find(':not(.carousel-controls)').children('ul');
         $li = $ul.find('li');
@@ -54,10 +55,9 @@
         itemCount = $li.length;
         controlsCount = $controls.length;
         animationRunning = false;
+        $listWrapper = $self.find('.list-wrapper');
         if (itemCount > 1) {
           init = function() {
-            itemWidth = $li.width();
-            itemHeight = $li.height();
             if ($self.data('carousel') != null) {
               $self.data('carousel').currentItem = 0;
             }
@@ -66,25 +66,49 @@
               'left': 0,
               'top': 0
             });
-            if (opts.vertical) {
-              $ul.css({
-                'height': "" + (itemHeight * itemCount) + "px"
-              });
-            } else {
-              $ul.css({
-                'width': "" + (itemWidth * itemCount) + "px"
-              });
-            }
-            if (!$self.find('.list-wrapper').length) {
+            if (!$listWrapper.length) {
               $ul.wrap($('<div />', {
                 'class': 'list-wrapper'
               }));
+              $listWrapper = $self.find('.list-wrapper');
             }
             $li.css({
               'opacity': 1
             }).filter(':not(:first)').css({
               'opacity': 0
             });
+            if (opts.variableDimensions) {
+              $li.each(function() {
+                var $liItem;
+                $liItem = $(this);
+                if (opts.vertical) {
+                  return $liItem.css({
+                    'height': "" + (getChildrenHeight($liItem)) + "px"
+                  });
+                } else {
+                  return $liItem.css({
+                    'width': "" + (getChildrenWidth($liItem)) + "px"
+                  });
+                }
+              });
+            }
+            itemWidth = $li.eq(0).width();
+            itemHeight = $li.eq(0).height();
+            if (opts.vertical) {
+              $ul.css({
+                'height': "" + (opts.variableDimensions ? getPreviousHeight(itemCount) : itemCount * itemHeight) + "px"
+              });
+              $listWrapper.css({
+                'height': "" + itemHeight + "px"
+              });
+            } else {
+              $ul.css({
+                'width': "" + (opts.variableDimensions ? getPreviousWidth(itemCount) : itemCount * itemWidth) + "px"
+              });
+              $listWrapper.css({
+                'width': "" + itemWidth + "px"
+              });
+            }
             $previousArrow.addClass('disabled');
             $nextArrow.removeClass('disabled');
             if (itemCount < 2) $nextArrow.addClass('disabled');
@@ -112,6 +136,48 @@
               });
             });
           };
+          getPreviousHeight = function(index) {
+            var dim, item, _i, _len, _ref;
+            dim = 0;
+            _ref = $li.slice(0, index);
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              item = _ref[_i];
+              dim += $(item).height();
+            }
+            return dim;
+          };
+          getPreviousWidth = function(index) {
+            var dim, item, _i, _len, _ref;
+            dim = 0;
+            _ref = $li.slice(0, index);
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              item = _ref[_i];
+              dim += $(item).width();
+            }
+            return dim;
+          };
+          getChildrenHeight = function(item) {
+            var ch, child, height, _i, _len, _ref;
+            height = 0;
+            _ref = item.children();
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              child = _ref[_i];
+              ch = $(child).outerHeight(true);
+              if (ch > height) height = ch;
+            }
+            return height;
+          };
+          getChildrenWidth = function(item) {
+            var child, cw, width, _i, _len, _ref;
+            width = 0;
+            _ref = item.children();
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              child = _ref[_i];
+              cw = $(child).outerWidth(true);
+              if (cw > width) width = cw;
+            }
+            return width;
+          };
           init();
           $self.data('carousel', {
             'currentItem': 0,
@@ -122,21 +188,12 @@
               return animationRunning = false;
             },
             'showItem': function(index) {
-              var animationProperties, animationSettings, layerAnimationSettings;
+              var animationProperties, animationSettings, layerAnimationSettings, wrapperAnimationProperties;
               if (index < 0 || index >= itemCount || index === $self.data('carousel').currentItem || animationRunning) {
                 return false;
               }
               animationRunning = true;
               opts.onAnimationInit(index, $li.eq(index));
-              if (opts.vertical) {
-                animationProperties = {
-                  'top': "" + (-index * itemHeight) + "px"
-                };
-              } else {
-                animationProperties = {
-                  'left': "" + (-index * itemWidth) + "px"
-                };
-              }
               animationSettings = {
                 'duration': opts.duration,
                 'easing': opts.easing,
@@ -149,6 +206,27 @@
                 'duration': opts.duration,
                 'easing': opts.easing
               };
+              if (opts.vertical) {
+                animationProperties = {
+                  'top': "" + (opts.variableDimensions ? -getPreviousHeight(index) : -index * itemHeight) + "px"
+                };
+                if (opts.variableDimensions) {
+                  wrapperAnimationProperties = {
+                    'height': "" + ($li.eq(index).height()) + "px"
+                  };
+                  $listWrapper.animate(wrapperAnimationProperties, animationSettings);
+                }
+              } else {
+                animationProperties = {
+                  'left': "" + (opts.variableDimensions ? -getPreviousWidth(index) : -index * itemWidth) + "px"
+                };
+                if (opts.variableDimensions) {
+                  wrapperAnimationProperties = {
+                    'width': "" + ($li.eq(index).width()) + "px"
+                  };
+                  $listWrapper.animate(wrapperAnimationProperties, animationSettings);
+                }
+              }
               $ul.stop().delay(opts.delay).animate(animationProperties, animationSettings);
               $li.each(function(i) {
                 var direction;
@@ -230,6 +308,17 @@
                               return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
                             });
                             opts.onAjaxComplete(index, data);
+                            if (opts.variableDimensions) {
+                              if (opts.vertical) {
+                                $requestedLi.css({
+                                  'height': "" + (getChildrenHeight($requestedLi)) + "px"
+                                });
+                              } else {
+                                $requestedLi.css({
+                                  'width': "" + (getChildrenWidth($requestedLi)) + "px"
+                                });
+                              }
+                            }
                             return $self.data('carousel').showItem(index);
                           }
                         }).error(function(msg) {
@@ -245,6 +334,17 @@
                         return $layer.data('speed', $layer.attr('data-speed') ? parseInt($layer.attr('data-speed')) : opts.speed);
                       });
                       opts.onAjaxComplete(index, data);
+                      if (opts.variableDimensions) {
+                        if (opts.vertical) {
+                          $requestedLi.css({
+                            'height': "" + (getChildrenHeight($requestedLi)) + "px"
+                          });
+                        } else {
+                          $requestedLi.css({
+                            'width': "" + (getChildrenWidth($requestedLi)) + "px"
+                          });
+                        }
+                      }
                       return $self.data('carousel').showItem(index);
                     }
                   },

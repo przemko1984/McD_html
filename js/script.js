@@ -8,6 +8,10 @@
     });
     $('.tiled-submenu').carousel();
     $('.timeline-carousel-container').carousel({
+      'vertical': true
+    });
+    $('.timeline-carousel-container').carousel({
+      'variableDimensions': true,
       'vertical': true,
       'onAnimationComplete': function(index, $li) {
         $('.decades li a').removeClass('active');

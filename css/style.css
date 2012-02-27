@@ -1263,7 +1263,6 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
   }
 
   .timeline-carousel {
-    height: 260px;
     margin: 40px 0;
     overflow: hidden;
     position: relative;
@@ -1279,7 +1278,7 @@ input[type="text"]::-webkit-input-placeholder, input[type="text"]::-moz-placehol
 
       .timeline-carousel li {
         display: block;
-        height: 260px;
+        
         position: relative;
         width: 100%;
       }

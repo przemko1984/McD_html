@@ -1,12 +1,13 @@
 (($) ->
 
 	$(document).ready ->
-		$('.carousel-container').carousel 'ajax': true
+		$('.carousel-container').carousel 'ajax': yes
 		$('.tiled-submenu').carousel()
-		$('.timeline-carousel-container').carousel 'vertical': true
+		$('.timeline-carousel-container').carousel 'vertical': yes
 
 		$('.timeline-carousel-container').carousel
-			'vertical': true
+			'variableDimensions': yes
+			'vertical': yes
 			'onAnimationComplete': (index, $li) ->
 				$('.decades li a').removeClass 'active'
 				$('.decades li[data-decade="' + $li.attr('data-decade') + '"]').find('a').addClass 'active'
@@ -25,7 +26,7 @@
 				percent = parseInt $bar.attr('data-percentage')
 				animationProperties = 'width' : "#{percent}%"
 				animationSettings = 'duration' : 'slow'
-				$bar.css('width': 0).stop(true).delay('slow').animate animationProperties, animationSettings
+				$bar.css('width': 0).stop(yes).delay('slow').animate animationProperties, animationSettings
 			$nutritionFacts.find('.close-button').click ->
 				$nutritionFacts.stop().slideUp()
 				$nutritionFactsButton.removeClass 'active'
