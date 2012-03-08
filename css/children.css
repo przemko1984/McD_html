@@ -1,0 +1,77 @@
+#children {
+	width: 100%;
+	height: 2550px;
+	overflow: hidden;
+	background-color: #000;
+	background-position: 50% 0;
+	background-repeat: no-repeat;
+	position: relative;
+	overflow: hidden;
+}
+
+#children.day {	background-image: url(../img/najmlodsi/dzien.jpg); }
+#children.night { background-image: url(../img/najmlodsi/noc.jpg); }
+
+	.ticks, .children-menu {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.children-menu {
+		font-family: "Open Sans Condensed", 'Arial Narrow', Arial, Helvetica, sans-serif; font-size-adjust: 0.488; font-weight: 100; font-style: normal;
+		width: 960px;
+		height: 340px;
+		background: url(../img/najmlodsi/menu_bg.png) no-repeat;
+		margin: 150px auto 0;
+	}
+
+		.children-menu li {
+			font-size: 1.38em;
+			display: block;
+			background-repeat: no-repeat;
+		}
+
+			.children-menu li a {
+				display: block;
+				color: #fff;
+				text-decoration: none;
+				width: 236px;
+				height: 59px;
+			}
+
+		.children-menu .item1 { background-image: url(../img/najmlodsi/menu_item_1.png); }
+		.children-menu .item2 { background-image: url(../img/najmlodsi/menu_item_2.png); }
+		.children-menu .item3 { background-image: url(../img/najmlodsi/menu_item_3.png); }
+		.children-menu .item4 { background-image: url(../img/najmlodsi/menu_item_4.png); }
+		.children-menu .item5 { background-image: url(../img/najmlodsi/menu_item_5.png); }
+		.children-menu .item6 { background-image: url(../img/najmlodsi/menu_item_6.png); }
+		.children-menu .item7 { background-image: url(../img/najmlodsi/menu_item_7.png); }
+
+	.ticks {
+		position: absolute;
+		top: 0;
+		left: 50%;
+	}
+
+		.ticks li {
+			position: absolute;
+			display: block;
+		}
+
+			.ticks li a {
+				display: block;
+				width: 97px;
+				height: 108px;
+				background: url(../img/najmlodsi/tick.png) no-repeat;
+				overflow: hidden;
+				text-indent: -999px;
+			}
+
+		.ticks .item1 {	top: 0; left: 0; }
+		.ticks .item2 {	top: 0; left: 0; }
+		.ticks .item3 {	top: 0; left: 0; }
+		.ticks .item4 {	top: 0; left: 0; }
+		.ticks .item5 {	top: 0; left: 0; }
+		.ticks .item6 {	top: 0; left: 0; }
+		.ticks .item7 {	top: 0; left: 0; }
