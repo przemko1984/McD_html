@@ -73,6 +73,13 @@
 					var $data = $(data),
 						$products = $data.find('.children-products a'),
 						$descriptions = $data.find('.children-descriptions li');
+					
+					$('html, body').animate({
+						'scrollTop': related.filter('.ticks li').offset().top - $(window).height()/2
+					}, {
+						'duration': 300,
+						'queue': false
+					});
 					$('body').data('modal').show($data);
 
 					$products.click(function(){

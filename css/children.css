@@ -133,6 +133,7 @@
 		.children-modal-content {
 			width: 730px;
 			padding-bottom: 20px;
+			position: relative;
 		}
 
 			.children-modal-content h3 {
@@ -140,6 +141,12 @@
 				padding: 0 0 .2em 104px;
 				border-bottom: 1px dashed #BCBDC0;
 				width: 600px;
+			}
+
+			.children-modal-content .badge {
+				position: absolute;
+				left: 5px;
+				top: -30px;
 			}
 
 			.children-carousel-container {
