@@ -55,13 +55,13 @@
 				padding: 10px 0px 15px 60px;
 			}
 
-		.children-menu .item1:hover { background-image: url(../img/najmlodsi/menu_item_1.png); }
-		.children-menu .item2:hover { background-image: url(../img/najmlodsi/menu_item_2.png); }
-		.children-menu .item3:hover { background-image: url(../img/najmlodsi/menu_item_3.png); }
-		.children-menu .item4:hover { background-image: url(../img/najmlodsi/menu_item_4.png); }
-		.children-menu .item5:hover { background-image: url(../img/najmlodsi/menu_item_5.png); }
-		.children-menu .item6:hover { background-image: url(../img/najmlodsi/menu_item_6.png); }
-		.children-menu .item7:hover { background-image: url(../img/najmlodsi/menu_item_7.png); }
+		.children-menu .item1:hover, .children-menu .item1.active { background-image: url(../img/najmlodsi/menu_item_1.png); }
+		.children-menu .item2:hover, .children-menu .item2.active { background-image: url(../img/najmlodsi/menu_item_2.png); }
+		.children-menu .item3:hover, .children-menu .item3.active { background-image: url(../img/najmlodsi/menu_item_3.png); }
+		.children-menu .item4:hover, .children-menu .item4.active { background-image: url(../img/najmlodsi/menu_item_4.png); }
+		.children-menu .item5:hover, .children-menu .item5.active { background-image: url(../img/najmlodsi/menu_item_5.png); }
+		.children-menu .item6:hover, .children-menu .item6.active { background-image: url(../img/najmlodsi/menu_item_6.png); }
+		.children-menu .item7:hover, .children-menu .item7.active { background-image: url(../img/najmlodsi/menu_item_7.png); }
 
 	.ticks {
 		position: absolute;
@@ -90,3 +90,42 @@
 		.ticks .item5 {	left: 210px; top: 1145px; }
 		.ticks .item6 {	left: -355px; top: 1145px; }
 		.ticks .item7 {	left: -175px; top: 1380px; }
+
+.modal-container {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .15);
+	z-index: 10000;
+	top: 0;
+	left: 0;
+}
+
+	.modal {
+		width: 730px;
+		min-height: 300px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -150px 0 0 -365px;
+		background-color: #fff;
+
+		-webkit-border-radius:	4px;
+		-moz-border-radius:		4px;
+		-o-border-radius:		4px;
+		-ms-border-radius:		4px;
+		border-radius:			4px;
+	}
+
+		.modal-close {
+			background: url(../img/najmlodsi/btn_exit.png) no-repeat;
+			display: block;
+			width: 25px;
+			height: 26px;
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			overflow: hidden;
+			text-indent: -999px;
+			cursor: pointer;
+		}
