@@ -3,7 +3,8 @@
 	$.fn.modal = function(options) {
 
 		var defaults = {
-			'onClose': $.noop
+			'onClose': $.noop,
+			'onOpen': $.noop
 		},
 			opts = $.extend(defaults, options);
 
@@ -33,9 +34,11 @@
 
 			$self.data('modal', {
 				show: function($data) {
-					//console.log($data);
 					$html.find('.modal-content').empty().append($data);
-					$html.stop().fadeIn();
+					var $modal = $html.find('.modal');
+					$html.stop().fadeIn(function(){
+						opts.onOpen($data);
+					});
 				}
 			});
 
@@ -50,6 +53,9 @@
 		$('body').modal({
 			'onClose': function() {
 				$menu.removeClass('active');
+			},
+			'onOpen': function($data) {
+				$data.find('.children-carousel-container').carousel();
 			}
 		});
 
@@ -64,8 +70,23 @@
 				
 				success : function(data) {
 					related.addClass('active');
-					var $data = $(data);
+					var $data = $(data),
+						$products = $data.find('.children-products a'),
+						$descriptions = $data.find('.children-descriptions li');
 					$('body').data('modal').show($data);
+
+					$products.click(function(){
+						var $this = $(this),
+							$active = $descriptions.filter('.active');
+						if($active.attr('data-description') === $this.attr('data-description')) return false;
+						if($active.length)
+							$descriptions.filter('.active').removeClass('active').stop().slideUp(function(){
+								$descriptions.filter('[data-description="' + $this.attr('data-description') + '"]').addClass('active').stop().slideDown();
+							});
+						else
+							$descriptions.filter('[data-description="' + $this.attr('data-description') + '"]').addClass('active').stop().slideDown();
+						return false;
+					});
 				}
 
 			});

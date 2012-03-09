@@ -105,9 +105,9 @@
 		width: 730px;
 		min-height: 300px;
 		position: absolute;
-		top: 50%;
+		top: 20%;
 		left: 50%;
-		margin: -150px 0 0 -365px;
+		margin: 0 0 0 -365px;
 		background-color: #fff;
 
 		-webkit-border-radius:	4px;
@@ -128,4 +128,96 @@
 			overflow: hidden;
 			text-indent: -999px;
 			cursor: pointer;
+		}
+
+		.children-modal-content {
+			width: 730px;
+			padding-bottom: 20px;
+		}
+
+			.children-modal-content h3 {
+				margin: .5em 13px;
+				padding: 0 0 .2em 104px;
+				border-bottom: 1px dashed #BCBDC0;
+				width: 600px;
+			}
+
+			.children-carousel-container {
+				width: 704px;
+				margin: 0 13px;
+				border-bottom: 1px dashed #BCBDC0;
+				padding-bottom: 20px;
+				position: relative;
+			}
+
+				.children-carousel {
+					width: 600px;
+					height: 200px;
+					overflow: hidden;
+					margin: 0 auto;
+					position: relative;
+				}
+
+					.children-carousel ul {
+						padding: 0;
+						margin: 0;
+						list-style: none;
+					}
+
+						.children-carousel li {
+							float: left;
+							display: block;
+							width: 600px;
+							height: 200px;
+						}
+
+			.children-carousel-container .carousel-arrow {
+				width: 45px;
+				height: 44px;
+				margin: -22px 0 0 0;
+			}
+
+			.children-carousel-container .next-arrow {
+				right: 0;
+				background: url(../img/najmlodsi/carousel-arrows.png) -45px 0 no-repeat;
+			}
+
+			.children-carousel-container .previous-arrow {
+				left: 0;
+				background: url(../img/najmlodsi/carousel-arrows.png) 0 0 no-repeat;
+			}
+
+.children-products a {
+	display: block;
+	width: 200px;
+	height: 200px;
+	float: left;
+	text-align: center;
+}
+
+.children-descriptions {
+	background-color: #54adda;
+	width: 704px;
+	margin: 10px 13px 0;
+	padding: 0;
+	list-style: none;
+}
+
+	.children-descriptions li {
+		width: 664px;
+		padding: 0 20px;
+		display: none;
+		overflow: hidden;
+	}
+
+		.children-descriptions h4 {
+			color: #fff;
+			font-size: 2.92em;
+			margin: .3em 0;
+		}
+
+		.children-descriptions p {
+			color: #fff;
+			font-size: 1.08em;
+			font-style: italic;
 		}
